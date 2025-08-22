@@ -9,7 +9,7 @@
 (procedure_title) @markup.heading
 
 ; Types
-(type_name) @type
+(forma) @type
 
 ; Sections and steps
 (section) @emphasis.strong
@@ -28,7 +28,8 @@
 (keyword) @keyword
 
 ; Invocations
-(invocation) @function
+(invocation_call) @function
+(function_call) @function
 
 ; Strings and literals
 (string) @string

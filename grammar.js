@@ -6,7 +6,11 @@ module.exports = grammar({
 
   extras: ($) => [/\s/],
 
-  conflicts: ($) => [[$.procedure_declaration, $._item]],
+  conflicts: ($) => [
+    [$.procedure_declaration, $._item],
+    [$.code_block, $.operator],
+    [$.code_block, $.function_call],
+  ],
 
   rules: {
     source_file: ($) => repeat($._item),
@@ -32,12 +36,12 @@ module.exports = grammar({
         $.attribute,
         $.response,
         $.code_block,
-        $.invocation,
+        $.invocation_call,
         $.string,
         $.multiline,
         $.tablet,
         $.identifier,
-        $.type_name,
+        $.forma,
         $.number,
         $.operator,
         $.text,
@@ -57,7 +61,7 @@ module.exports = grammar({
           optional(seq("(", repeat(seq($.identifier, optional(","))), ")")),
           ":",
           optional(
-            repeat(choice($.type_name, $.operator, "[", "]", "(", ")", ",")),
+            repeat(choice($.forma, $.operator, "[", "]", "(", ")", ",")),
           ),
           "\n",
         ),
@@ -75,7 +79,7 @@ module.exports = grammar({
     parallel_step: ($) => seq("-", /[^\n]+/),
 
     // Attributes
-    attribute: ($) => seq(choice("@", "%"), $.identifier),
+    attribute: ($) => seq(choice("@", "#"), $.identifier),
 
     // Response options
     response: ($) => seq("'", /[^']*/, "'"),
@@ -87,43 +91,94 @@ module.exports = grammar({
         repeat(
           choice(
             $.keyword,
+            $.function_call,
+            $.invocation_call,
             $.identifier,
             $.operator,
             $.number,
             $.string,
-            $.invocation,
-            /[^{}]+/,
+            $.multiline,
+            $.tablet,
+            "(",
+            ")",
+            ",",
+            "~",
+            /\s+/,
+            /[^{}()<>,~\s]+/,
           ),
         ),
         "}",
       ),
 
     // Keywords in code
-    keyword: ($) => choice("repeat", "foreach", "in", "exec", "now"),
+    keyword: ($) => choice("repeat", "foreach", "in"),
 
-    // Invocations
-    invocation: ($) =>
-      seq(
-        "<",
-        $.identifier,
-        optional(seq(":", $.identifier)),
-        ">",
-        optional(
-          seq(
-            "(",
-            repeat(choice($.identifier, $.string, $.number, ",")),
-            ")",
+    // function calls
+    function_call: ($) =>
+      prec(1,
+        seq(
+          field("name", choice(
+            /exec/,
+            /now/,
+            $.identifier
+          )),
+          "(",
+          optional(
+            repeat(
+              choice(
+                $.string,
+                $.multiline,
+                $.number,
+                $.identifier,
+                $.invocation_call,
+                ",",
+                /\s+/,
+              ),
+            ),
+          ),
+          ")",
+        ),
+      ),
+
+    // invocation calls
+    invocation_call: ($) =>
+      prec.left(
+        seq(
+          "<",
+          field("name", $.identifier),
+          optional(seq(":", $.identifier)),
+          ">",
+          optional(
+            seq(
+              "(",
+              repeat(choice($.identifier, $.string, $.number, ",")),
+              ")",
+            ),
           ),
         ),
       ),
 
     // Strings
     string: ($) =>
-      seq('"', repeat(choice(/[^"{}]+/, seq("{", /[^}]*/, "}"))), '"'),
+      seq(
+        '"',
+        repeat(
+          choice(
+            /[^"{}]+/,
+            seq("{", /\s*/, optional($.identifier), /\s*/, "}"),
+          ),
+        ),
+        '"',
+      ),
 
     // Multiline strings
     multiline: ($) =>
-      seq("```", optional(/[a-z]+/), /([^`]|`[^`]|``[^`])*/, "```"),
+      seq(
+        "```",
+        optional(field("language", /[a-z]+/)),
+        field("content", /([^`]|`[^`]|``[^`])*/),
+        "```",
+      ),
 
     // Tablets
     tablet: ($) =>
@@ -131,11 +186,19 @@ module.exports = grammar({
         "[",
         repeat(
           seq(
-            '"',
-            /[^"]*/,
-            '"',
+            field("label", seq('"', /[^"]*/, '"')),
             "=",
-            choice($.string, $.number, $.identifier, $.invocation, /[^\],]+/),
+            field(
+              "value",
+              choice(
+                $.string,
+                $.number,
+                $.identifier,
+                $.function_call,
+                $.invocation_call,
+                /[^\],]+/,
+              ),
+            ),
           ),
         ),
         "]",
@@ -143,9 +206,9 @@ module.exports = grammar({
 
     // Basic tokens
     identifier: ($) => /[a-z][a-z0-9_]*/,
-    type_name: ($) => /[A-Z][a-zA-Z0-9]*/,
-    number: ($) => /-?\d+(\.\d+)?([eE][+-]?\d+)?/,
-    operator: ($) => choice("->", "~", "=", "±", ":"),
+    forma: ($) => /[A-Z][a-zA-Z0-9]*/,
+    number: ($) => /-?\d+(\.\d+)?/,
+    operator: ($) => choice("->", "=", "±", ":", "~"),
     text: ($) => /[^%!&#\-@'`{\[<"0-9a-zA-Z]+/,
   },
 });
