@@ -1,0 +1,23 @@
+{
+  "name": "tree-sitter-technique",
+  "version": "0.1.0",
+  "description": "Tree Sitter grammar for Technique procedure language",
+  "main": "grammar.js",
+  "keywords": [
+    "tree-sitter",
+    "technique"
+  ],
+  "author": "Andrew Cowie <istathar@gmail.com>",
+  "license": "MIT",
+  "tree-sitter": [
+    {
+      "scope": "source.technique",
+      "file-types": [
+        "t",
+        "tq",
+        "technique"
+      ],
+      "highlights": "queries/highlights.scm"
+    }
+  ]
+}

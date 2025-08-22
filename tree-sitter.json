@@ -1,0 +1,18 @@
+{
+  "grammars": [
+    {
+      "name": "technique",
+      "scope": "source.technique",
+      "path": ".",
+      "file-types": ["t", "tq", "technique"],
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^(technique|tq)$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for Technique procedure language",
+    "author": "Andrew Cowie <istathar@gmail.com>"
+  }
+}
