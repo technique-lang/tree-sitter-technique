@@ -1,7 +1,7 @@
 ; Headers
-(header_magic) @keyword.directive
-(header_spdx) @comment.documentation
-(header_template) @keyword.directive
+(header_magic) @preproc
+(header_spdx) @preproc
+(header_template) @preproc
 
 ; Procedure declarations
 (procedure_declaration
@@ -12,23 +12,23 @@
 (type_name) @type
 
 ; Sections and steps
-(section) @markup.heading
-(numbered_step) @markup.list.numbered
-(lettered_step) @markup.list.numbered
-(parallel_step) @markup.list.unnumbered
+(section) @emphasis.strong
+(numbered_step) @emphasis.strong
+(lettered_step) @emphasis.strong
+(parallel_step) @emphasis.strong
 
 ; Attributes
 (attribute) @attribute
 
 ; Responses
-(response) @string.special
+(response) @constructor
 
 ; Code blocks and keywords
 (code_block) @embedded
 (keyword) @keyword
 
 ; Invocations
-(invocation) @function.call
+(invocation) @function
 
 ; Strings and literals
 (string) @string
@@ -39,8 +39,8 @@
 
 ; Basic tokens
 (identifier) @variable
-(number) @constant.numeric
+(number) @number
 (operator) @operator
 
 ; General text
-(text) @text
+(text) @text.literal
