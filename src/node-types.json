@@ -23,15 +23,23 @@
       "required": false,
       "types": [
         {
+          "type": "function_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
-          "type": "invocation",
+          "type": "invocation_call",
           "named": true
         },
         {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "multiline",
           "named": true
         },
         {
@@ -40,6 +48,52 @@
         },
         {
           "type": "operator",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_call",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "invocation_call",
+          "named": true
+        },
+        {
+          "type": "multiline",
+          "named": true
+        },
+        {
+          "type": "number",
           "named": true
         },
         {
@@ -65,12 +119,23 @@
     "fields": {}
   },
   {
-    "type": "invocation",
+    "type": "invocation_call",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "identifier",
@@ -137,15 +202,15 @@
       "required": false,
       "types": [
         {
+          "type": "forma",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "operator",
-          "named": true
-        },
-        {
-          "type": "type_name",
           "named": true
         }
       ]
@@ -184,6 +249,10 @@
           "named": true
         },
         {
+          "type": "forma",
+          "named": true
+        },
+        {
           "type": "header_magic",
           "named": true
         },
@@ -200,7 +269,7 @@
           "named": true
         },
         {
-          "type": "invocation",
+          "type": "invocation_call",
           "named": true
         },
         {
@@ -254,21 +323,12 @@
         {
           "type": "text",
           "named": true
-        },
-        {
-          "type": "type_name",
-          "named": true
         }
       ]
     }
   },
   {
     "type": "string",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "tablet",
     "named": true,
     "fields": {},
     "children": {
@@ -278,20 +338,50 @@
         {
           "type": "identifier",
           "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "tablet",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "\"",
+            "named": false
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "invocation_call",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -375,12 +465,12 @@
     "named": false
   },
   {
-    "type": "exec",
+    "type": "foreach",
     "named": false
   },
   {
-    "type": "foreach",
-    "named": false
+    "type": "forma",
+    "named": true
   },
   {
     "type": "identifier",
@@ -388,10 +478,6 @@
   },
   {
     "type": "in",
-    "named": false
-  },
-  {
-    "type": "now",
     "named": false
   },
   {
@@ -408,10 +494,6 @@
   },
   {
     "type": "text",
-    "named": true
-  },
-  {
-    "type": "type_name",
     "named": true
   },
   {
