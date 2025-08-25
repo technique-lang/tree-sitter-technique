@@ -1,68 +1,6 @@
 [
   {
-    "type": "attribute",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "code_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "invocation_call",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "multiline",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "operator",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "tablet",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_call",
+    "type": "application",
     "named": true,
     "fields": {
       "name": {
@@ -85,7 +23,7 @@
           "named": true
         },
         {
-          "type": "invocation_call",
+          "type": "invocation",
           "named": true
         },
         {
@@ -98,6 +36,217 @@
         },
         {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "place_attribute",
+          "named": true
+        },
+        {
+          "type": "role_attribute",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binding_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expr",
+          "named": true
+        },
+        {
+          "type": "foreach_expr",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "repeat_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "code_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expr",
+          "named": true
+        },
+        {
+          "type": "foreach_expr",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "repeat_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "foreach_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expr",
+          "named": true
+        },
+        {
+          "type": "foreach_expr",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "repeat_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "genus",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "list_genus",
+          "named": true
+        },
+        {
+          "type": "naked_genus",
+          "named": true
+        },
+        {
+          "type": "simple_genus",
+          "named": true
+        },
+        {
+          "type": "tuple_genus",
+          "named": true
+        },
+        {
+          "type": "unit_genus",
           "named": true
         }
       ]
@@ -119,7 +268,58 @@
     "fields": {}
   },
   {
-    "type": "invocation_call",
+    "type": "interpolation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expr",
+          "named": true
+        },
+        {
+          "type": "foreach_expr",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "repeat_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "invocation",
     "named": true,
     "fields": {
       "name": {
@@ -153,14 +353,19 @@
     }
   },
   {
-    "type": "keyword",
+    "type": "list_genus",
     "named": true,
-    "fields": {}
-  },
-  {
-    "type": "lettered_step",
-    "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "forma",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "multiline",
@@ -168,9 +373,19 @@
     "fields": {}
   },
   {
-    "type": "numbered_step",
+    "type": "naked_genus",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "forma",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "operator",
@@ -178,9 +393,34 @@
     "fields": {}
   },
   {
-    "type": "parallel_step",
+    "type": "parameters",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "place_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "procedure_declaration",
@@ -202,15 +442,11 @@
       "required": false,
       "types": [
         {
-          "type": "forma",
+          "type": "parameters",
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "operator",
+          "type": "signature",
           "named": true
         }
       ]
@@ -222,14 +458,110 @@
     "fields": {}
   },
   {
+    "type": "repeat_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expr",
+          "named": true
+        },
+        {
+          "type": "foreach_expr",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "repeat_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "response",
     "named": true,
     "fields": {}
   },
   {
+    "type": "role_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "section",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "signature",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "genus",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "simple_genus",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "forma",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "source_file",
@@ -246,6 +578,18 @@
         },
         {
           "type": "code_block",
+          "named": true
+        },
+        {
+          "type": "dependent_step",
+          "named": true
+        },
+        {
+          "type": "dependent_substep",
+          "named": true
+        },
+        {
+          "type": "dependent_subsubstep",
           "named": true
         },
         {
@@ -269,11 +613,7 @@
           "named": true
         },
         {
-          "type": "invocation_call",
-          "named": true
-        },
-        {
-          "type": "lettered_step",
+          "type": "invocation",
           "named": true
         },
         {
@@ -282,10 +622,6 @@
         },
         {
           "type": "number",
-          "named": true
-        },
-        {
-          "type": "numbered_step",
           "named": true
         },
         {
@@ -336,7 +672,7 @@
       "required": false,
       "types": [
         {
-          "type": "identifier",
+          "type": "interpolation",
           "named": true
         }
       ]
@@ -361,7 +697,7 @@
         "required": false,
         "types": [
           {
-            "type": "function_call",
+            "type": "application",
             "named": true
           },
           {
@@ -369,7 +705,7 @@
             "named": true
           },
           {
-            "type": "invocation_call",
+            "type": "invocation",
             "named": true
           },
           {
@@ -382,6 +718,36 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "tuple_genus",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "forma",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -421,11 +787,11 @@
     "named": false
   },
   {
-    "type": ",",
+    "type": "+",
     "named": false
   },
   {
-    "type": "-",
+    "type": ",",
     "named": false
   },
   {
@@ -465,6 +831,18 @@
     "named": false
   },
   {
+    "type": "dependent_step",
+    "named": true
+  },
+  {
+    "type": "dependent_substep",
+    "named": true
+  },
+  {
+    "type": "dependent_subsubstep",
+    "named": true
+  },
+  {
     "type": "foreach",
     "named": false
   },
@@ -485,6 +863,10 @@
     "named": true
   },
   {
+    "type": "parallel_step",
+    "named": true
+  },
+  {
     "type": "repeat",
     "named": false
   },
@@ -494,6 +876,10 @@
   },
   {
     "type": "text",
+    "named": true
+  },
+  {
+    "type": "unit_genus",
     "named": true
   },
   {
