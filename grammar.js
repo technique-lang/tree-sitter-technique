@@ -9,7 +9,7 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.procedure_declaration, $._item],
     [$.code_block, $.operator],
-    [$.code_block, $.function_call],
+    [$.code_block, $.application],
   ],
 
   rules: {
@@ -28,15 +28,16 @@ module.exports = grammar({
 
         // Sections and steps
         $.section,
-        $.numbered_step,
-        $.lettered_step,
+        $.dependent_step,
+        $.dependent_substep,
+        $.dependent_subsubstep,
         $.parallel_step,
 
         // Special constructs
         $.attribute,
         $.response,
         $.code_block,
-        $.invocation_call,
+        $.invocation,
         $.string,
         $.multiline,
         $.tablet,
@@ -58,14 +59,36 @@ module.exports = grammar({
         2,
         seq(
           field("name", $.identifier),
-          optional(seq("(", repeat(seq($.identifier, optional(","))), ")")),
+          optional($.parameters),
           ":",
-          optional(
-            repeat(choice($.forma, $.operator, "[", "]", "(", ")", ",")),
-          ),
+          optional($.signature),
           "\n",
         ),
       ),
+
+    // Parameters in procedure declaration
+    parameters: ($) =>
+      seq("(", $.identifier, repeat(seq(",", $.identifier)), ")"),
+
+    // Signature with Genus types
+    signature: ($) =>
+      seq($.genus, "->", $.genus),
+
+    // Genus types
+    genus: ($) =>
+      choice(
+        $.unit_genus,
+        $.simple_genus,
+        $.list_genus,
+        $.tuple_genus,
+        $.naked_genus,
+      ),
+
+    unit_genus: ($) => "()",
+    simple_genus: ($) => $.forma,
+    list_genus: ($) => seq("[", $.forma, "]"),
+    tuple_genus: ($) => seq("(", $.forma, repeat(seq(",", $.forma)), ")"),
+    naked_genus: ($) => seq($.forma, ",", $.forma, repeat(seq(",", $.forma))),
 
     // Procedure title
     procedure_title: ($) => seq("#", /[^\n]+/),
@@ -73,13 +96,16 @@ module.exports = grammar({
     // Section
     section: ($) => seq(/[IVX]+\./, /[^\n]*/),
 
-    // Steps
-    numbered_step: ($) => seq(/\d+\./, /[^\n]*/),
-    lettered_step: ($) => seq(/[a-z]\./, /[^\n]*/),
-    parallel_step: ($) => seq("-", /[^\n]+/),
+    // Steps markers (only capture the step marker itself, not the entire line)
+    dependent_step: ($) => /\d+\.\s/,                    // 1. 2. 3. etc.
+    dependent_substep: ($) => /[a-hj-km-uwyz]\.\s/,      // a. b. c.
+    dependent_subsubstep: ($) => /[ivxl]+\.\s/,          // i. ii. iii. iv. etc.
+    parallel_step: ($) => /\-\s/,                        // -
 
     // Attributes
-    attribute: ($) => seq(choice("@", "#"), $.identifier),
+    attribute: ($) => choice($.role_attribute, $.place_attribute),
+    role_attribute: ($) => seq("@", $.identifier, repeat(seq("+", "@", $.identifier))),
+    place_attribute: ($) => seq("#", $.identifier),
 
     // Response options
     response: ($) => seq("'", /[^']*/, "'"),
@@ -88,33 +114,43 @@ module.exports = grammar({
     code_block: ($) =>
       seq(
         "{",
-        repeat(
-          choice(
-            $.keyword,
-            $.function_call,
-            $.invocation_call,
-            $.identifier,
-            $.operator,
-            $.number,
-            $.string,
-            $.multiline,
-            $.tablet,
-            "(",
-            ")",
-            ",",
-            "~",
-            /\s+/,
-            /[^{}()<>,~\s]+/,
-          ),
-        ),
+        repeat($._expression),
         "}",
       ),
+
+    // Expressions
+    _expression: ($) =>
+      choice(
+        $.variable,
+        $.string,
+        $.multiline,
+        $.number,
+        $.invocation,
+        $.application,
+        $.foreach_expr,
+        $.repeat_expr,
+        $.binding_expr,
+        $.tablet,
+        /\s+/,
+      ),
+
+    // Expression components
+    variable: ($) => $.identifier,
+    
+    foreach_expr: ($) =>
+      prec(2, seq("foreach", $.identifier, "in", $._expression)),
+    
+    repeat_expr: ($) =>
+      prec(2, seq("repeat", $._expression)),
+    
+    binding_expr: ($) =>
+      prec.left(1, seq($._expression, "~", $.identifier)),
 
     // Keywords in code
     keyword: ($) => choice("repeat", "foreach", "in"),
 
-    // function calls
-    function_call: ($) =>
+    // Applications (function calls)
+    application: ($) =>
       prec(1,
         seq(
           field("name", choice(
@@ -130,7 +166,7 @@ module.exports = grammar({
                 $.multiline,
                 $.number,
                 $.identifier,
-                $.invocation_call,
+                $.invocation,
                 ",",
                 /\s+/,
               ),
@@ -140,8 +176,8 @@ module.exports = grammar({
         ),
       ),
 
-    // invocation calls
-    invocation_call: ($) =>
+    // Invocations
+    invocation: ($) =>
       prec.left(
         seq(
           "<",
@@ -158,18 +194,22 @@ module.exports = grammar({
         ),
       ),
 
-    // Strings
+    // Strings with interpolation
     string: ($) =>
       seq(
         '"',
         repeat(
           choice(
             /[^"{}]+/,
-            seq("{", /\s*/, optional($.identifier), /\s*/, "}"),
+            $.interpolation,
           ),
         ),
         '"',
       ),
+
+    // String interpolation supports expressions
+    interpolation: ($) =>
+      seq("{", optional($._expression), "}"),
 
     // Multiline strings
     multiline: ($) =>
@@ -194,8 +234,8 @@ module.exports = grammar({
                 $.string,
                 $.number,
                 $.identifier,
-                $.function_call,
-                $.invocation_call,
+                $.application,
+                $.invocation,
                 /[^\],]+/,
               ),
             ),
