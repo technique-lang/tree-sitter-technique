@@ -1,61 +1,86 @@
-; Headers
-(header_magic) @preproc
-(header_spdx) @preproc
-(header_template) @preproc
+; Tree-sitter highlighting for Technique language
+; Maps tokens to colors based on Syntax enum
 
-; Procedure declarations
-(procedure_declaration
-  name: (identifier) @function)
-(procedure_title) @markup.heading
+; Text - default
+(description) @text.technique.text.description
 
-; Types and Genus
-(forma) @type
-(unit_genus) @type
-(simple_genus) @type
-(list_genus) @type
-(tuple_genus) @type
-(naked_genus) @type
+(paragraph) @text.technique.text.descriptive
 
-; Sections and steps - emphasis.strong for bold white rendering in Zed
-(section) @emphasis.strong
-(dependent_step) @emphasis.strong
-(dependent_substep) @emphasis.strong
-(dependent_subsubstep) @emphasis.strong
-(parallel_step) @emphasis.strong
 
-; Attributes
-(role_attribute) @attribute
-(place_attribute) @attribute
+; Headers - pragma - purple #75507b
+(metadata) @preproc.technique.metadata
 
-; Responses
-(response) @constructor
+; Procedure declarations have structural characters as separators. Notably,
+; the brackets or parenthesis around Genus are coloured as structural not as a
+; part of the Forma.
+(declaration) @punctuation.technique.structural.declaration
+(signature) @punctuation.technique.structural.signature
+(genus) @punctuation.technique.structural.genus
 
-; Code blocks
-(code_block) @embedded
+; Forma are the names of types - brown #8f5902
+(forma) @type.technique.forma
 
-; Expressions
-(foreach_expr "foreach" @keyword)
-(foreach_expr "in" @keyword)
-(repeat_expr "repeat" @keyword)
-(binding_expr "~" @operator)
+; Procedures then have titles, descriptions, and then steps.
+; Title marker - pragma - purple #75507b
+; Title text - bright white (bold)
+(title_marker) @preproc.technique.title
+(title_text) @title.technique.title
 
-; Invocations and functions
-(invocation) @function
-(application) @function
+; Sections
+(section_marker) @punctuation.list_marker.technqiue.step_item
+(section_text) @text.technique.section.text
 
-; Strings and literals
-(string) @string
-(multiline) @string
-(interpolation) @embedded
+; Step items - bright white
+(step_marker) @punctuation.list_marker.technqiue.step_item
 
-; Tablets
-(tablet) @punctuation.bracket
+; Attributes - bright white
+(attribute) @attribute
 
-; Basic tokens
-(identifier) @variable
-(variable) @variable
-(number) @number
-(operator) @operator
 
-; General text
-(text) @text.literal
+
+
+; Response options - orange #f57900
+(response_marker) @punctuation.technique.quotes.response
+(response_value) @variant.technique.response
+
+; Strings - green #4e9a06
+(string_marker) @punctuation.technique.quotes.string
+(string_literal) @string.technique.string
+
+; Multiline strings - green #4e9a06
+(multiline_string) @string
+
+; Numeric values - purple #ad7fa8
+(numeric_literal) @number.technique.numeric
+
+; Declarations - blue #3465a4
+
+
+
+(code_start_marker) @punctuation.technique.structural.code
+(code_end_marker) @punctuation.technique.structural.code
+
+; Keywords - purple #75507b
+(repeat_keyword) @keyword.technique.keyword
+(foreach_keyword) @keyword.technique.keyword
+(in_keyword) @keyword.technique.keyword
+
+; Functions - blue #3465a4
+(function_name) @function.technique.application
+
+; Invocations - dark blue #3b5d7d
+(invocation_target) @function.technique.invocation
+(invocation_start_marker) @punctuation.technique.structural.invocation
+(invocation_end_marker) @punctuation.technique.structural.invocation
+(parameters_start_marker) @punctuation.technique.structural.parameters
+(parameters_end_marker) @punctuation.technique.structural.parameters
+(parameters_separator_marker) @punctuation.technique.structural.parameters
+
+; Binding - gray #999999
+(binding_marker) @punctuation.technique.structural.binding
+
+(label_marker) @punctuation.technique.quotes.label
+(label_text) @text.technique.label
+
+; Variable - light blue #729fcf
+(variable) @variable.technique.identifier
