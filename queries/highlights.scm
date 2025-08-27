@@ -47,8 +47,13 @@
 (multiline_language) @embedded.technique.multiline
 
 ; Functions
-(function_name) @function.technique.application
+(function_name) @function.builtin.technique.application
 
 (parameters_start_marker) @punctuation.technique.parameters
 (parameters_end_marker) @punctuation.technique.parameters
 (parameters_separator_marker) @punctuation.technique.parameters
+
+; Invocations
+(invocation_target) @function.technique.invocation
+(invocation_start_marker) @punctuation.technique.invocation
+(invocation_end_marker) @punctuation.technique.invocation

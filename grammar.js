@@ -207,11 +207,12 @@ module.exports = grammar({
 
                 // $.repeat_expression,
                 // $.foreach_expression,
-                // $._invocation,
+                $.invocation,
                 $.application,
                 $.string_literal,
                 $.numeric_literal,
                 $.multiline_literal,
+                $.binding_expression,
                 // $._tablet,
             ),
 
@@ -258,7 +259,7 @@ module.exports = grammar({
         multiline_content: ($) => token(/([^`]|`[^`]|``[^`])+/),
 
         // Invocations
-        _invocation: ($) =>
+        invocation: ($) =>
             prec.left(
                 seq(
                     $.invocation_start_marker,
@@ -330,16 +331,17 @@ module.exports = grammar({
                     $.parameters_start_marker,
                     $.variable,
                     repeat(seq($.parameters_separator_marker, $.variable)),
+                    $.parameters_end_marker,
                 ),
             ),
 
         binding_expression: ($) =>
-            prec.left(1, seq($._expression, $.binding_marker, $._arguments)),
+            seq($._expression, $.binding_marker, $._arguments),
+
+        binding_marker: ($) => "~",
 
         repeat_expression: ($) =>
             prec(2, seq($.repeat_keyword, $._expression)),
-
-        binding_marker: ($) => "~",
 
         // Tablet - key-value pairs in brackets
         _tablet: ($) =>
