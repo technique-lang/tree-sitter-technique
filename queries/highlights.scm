@@ -13,16 +13,16 @@
 ; the brackets or parenthesis around Genus are coloured as structural not as a
 ; part of the Forma.
 (procedure_name) @label.technqiue.declaration
-(declaration_marker) @punctuation.technique.structural.declaration
-(signature) @punctuation.technique.structural.signature
-(genus) @punctuation.technique.structural.genus
+(declaration_marker) @punctuation.technique.declaration
+(signature) @punctuation.technique.signature
+(genus) @punctuation.technique.genus
 
 ; Forma are the names of types - brown #8f5902
 (forma) @type.technique.forma
 
-(parameters_start_marker) @punctuation.technique.structural.parameters
-(parameters_end_marker) @punctuation.technique.structural.parameters
-(parameters_separator_marker) @punctuation.technique.structural.parameters
+(parameters_start_marker) @punctuation.technique.parameters
+(parameters_end_marker) @punctuation.technique.parameters
+(parameters_separator_marker) @punctuation.technique.parameters
 
 (variable) @variable.technique.identifier
 
@@ -31,8 +31,8 @@
 (title_text) @title.technique.title
 
 ; Code blocks
-(code_start_marker) @punctuation.technique.structural.code
-(code_end_marker) @punctuation.technique.structural.code
+(code_start_marker) @punctuation.technique.code
+(code_end_marker) @punctuation.technique.code
 
 ; Numeric values, integral and quantity
 (numeric_literal) @number.technique.numeric
@@ -41,9 +41,14 @@
 (string_marker) @punctuation.technique.quotes.string
 (string_text) @string.technique.string
 
+; Multiline string literals
+(multiline_content) @string.technique.multiline
+(multiline_marker) @punctuation.technique.multiline
+(multiline_language) @embedded.technique.multiline
+
 ; Functions
 (function_name) @function.technique.application
 
-(parameters_start_marker) @punctuation.technique.structural.parameters
-(parameters_end_marker) @punctuation.technique.structural.parameters
-(parameters_separator_marker) @punctuation.technique.structural.parameters
+(parameters_start_marker) @punctuation.technique.parameters
+(parameters_end_marker) @punctuation.technique.parameters
+(parameters_separator_marker) @punctuation.technique.parameters

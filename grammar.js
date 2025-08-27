@@ -112,13 +112,24 @@ module.exports = grammar({
         // line rules to be chosen.
         _text: ($) => token(prec(-1, /[^\n{~]+/)),
 
-        // inline code within descriptive text
+        // inline code within descriptive text. We have to jump through some
+        // additional hoops to relax and support multiline constructs
         inline_code: ($) =>
             seq(
                 $.code_start_marker,
-                optional($._expression),
+                optional($._inline_code_content),
                 $.code_end_marker,
             ),
+
+        _inline_code_content: ($) =>
+            choice(
+                $._expression,
+                seq(
+                    optional($._expression),
+                    repeat1(seq(/\n+/, optional($._expression))),
+                ),
+            ),
+
         code_start_marker: ($) => "{",
         code_end_marker: ($) => "}",
 
@@ -193,14 +204,15 @@ module.exports = grammar({
         _expression: ($) =>
             choice(
                 $.variable,
-                $.repeat_expression,
-                $.foreach_expression,
-                $._invocation,
-                $._application,
+
+                // $.repeat_expression,
+                // $.foreach_expression,
+                // $._invocation,
+                $.application,
                 $.string_literal,
                 $.numeric_literal,
-                $._multiline_literal,
-                $._tablet,
+                $.multiline_literal,
+                // $._tablet,
             ),
 
         variable: ($) => $._identifier,
@@ -232,17 +244,18 @@ module.exports = grammar({
             ),
 
         // Multiline strings
-        _multiline_literal: ($) =>
+        multiline_literal: ($) =>
             seq(
                 $.multiline_marker,
                 optional($.multiline_language),
-                repeat($.multiline_string),
+                "\n",
+                optional($.multiline_content),
                 $.multiline_marker,
             ),
 
         multiline_marker: ($) => "```",
-        multiline_language: ($) => /[a-z]+/,
-        multiline_string: ($) => /[^`]+/,
+        multiline_language: ($) => token.immediate(/[a-z]+/),
+        multiline_content: ($) => token(/([^`]|`[^`]|``[^`])+/),
 
         // Invocations
         _invocation: ($) =>
@@ -280,15 +293,20 @@ module.exports = grammar({
                 seq(
                     $.function_name,
                     $.parameters_start_marker,
-                    repeat(
-                        choice(
-                            $.variable,
-                            $.string_literal,
-                            $.numeric_literal,
-                            $.multiline_literal,
-                            $.parameters_separator_marker,
+                    optional(/\n+/), // Allow newlines after opening parenthesis
+                    optional(
+                        seq(
+                            $._expression,
+                            repeat(
+                                seq(
+                                    $.parameters_separator_marker,
+                                    optional(/\n+/),
+                                    $._expression,
+                                ),
+                            ),
                         ),
                     ),
+                    optional(/\n+/), // Allow newlines before closing parenthesis
                     $.parameters_end_marker,
                 ),
             ),
