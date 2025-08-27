@@ -4,22 +4,20 @@
 module.exports = grammar({
     name: "technique",
 
-    extras: ($) => [/\s/],
+    extras: ($) => [/[ \t]/],
 
     conflicts: ($) => [[$.paragraph]],
 
     rules: {
         // Overall document structure. Metadata, if present, followed by a
         // Technique.
-        source_file: ($) => seq(optional($.metadata), optional($._technique)),
+        // source_file: ($) => seq(optional($.metadata), optional($._body)),
+        source_file: ($) => $._body,
 
+        _blank_line: ($) => "\n",
         // Metadata block of headers
         metadata: ($) =>
-            seq(
-                $._magic_line,
-                optional($._spdx_line),
-                optional($._template_line),
-            ),
+            choice($._magic_line, $._spdx_line, $._template_line),
 
         // Header lines are a single line ending with a newline
         _magic_line: ($) => seq("%", "technique", "v1", "\n"),
@@ -27,14 +25,15 @@ module.exports = grammar({
         _template_line: ($) => seq("&", /[^\n]+/, "\n"),
 
         // a Technique is either standalone Scopes (nested steps) or a series
-        // of Procedures (which can contain nested steps)
-        _technique: ($) => choice(repeat1($._scope), repeat1($._procedure)),
+        // of Procedures (which can contain nested steps). But for syntax highlighting purposes
+        // we don't care about that structural ambiguity. We're just going to detect lines.
+        _body: ($) => repeat1(choice($.metadata, $._declaration, $._blank_line)),
 
         // Procedure with optional title, description, and scopes
         _procedure: ($) =>
             prec.left(
                 seq(
-                    $.declaration,
+                    $._declaration,
                     optional($._procedure_title),
                     optional($.description),
                     repeat($._scope),
@@ -43,13 +42,13 @@ module.exports = grammar({
 
         // Procedure declarations can be across multiple lines but are
         // terminated by (separated from subsequent content) a newline.
-        declaration: ($) =>
+        _declaration: ($) =>
             prec(
                 2,
                 seq(
                     $.procedure_name,
-                    optional($.parameters),
-                    ":",
+                    optional($._parameters),
+                    $.declaration_marker,
                     optional($.signature),
                     "\n",
                 ),
@@ -57,15 +56,23 @@ module.exports = grammar({
 
         procedure_name: ($) => $._identifier,
 
+        declaration_marker: ($) => ":",
+
         // used for procedure names and variable names
         _identifier: ($) => /[a-z][a-z0-9_]*/,
 
         // Parameters in procedure declaration
-        parameters: ($) =>
-            seq("(", $.variable, repeat(seq(",", $.variable)), ")"),
+        _parameters: ($) =>
+            seq(
+                $.parameters_start_marker,
+                $.variable,
+                repeat(seq($.parameters_separator_marker, $.variable)),
+                $.parameters_end_marker,
+            ),
 
         // Signature with domain and range Genus
-        signature: ($) => seq($.genus, "->", $.genus),
+        signature: ($) => seq($.genus, $.signature_marker, $.genus),
+        signature_marker: ($) => "->",
 
         // Genus encompass simple and compound types
         genus: ($) =>
