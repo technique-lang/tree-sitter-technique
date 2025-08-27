@@ -205,8 +205,8 @@ module.exports = grammar({
             choice(
                 $.variable,
 
-                // $.repeat_expression,
-                // $.foreach_expression,
+                $.repeat_expression,
+                $.foreach_expression,
                 $.invocation,
                 $.application,
                 $.string_literal,
@@ -281,7 +281,11 @@ module.exports = grammar({
                     ),
                 ),
             ),
-        invocation_target: ($) => $._identifier,
+        invocation_target: ($) =>
+            choice(
+                $._identifier, // local procedure
+                /https?:\/\/[^\s>]+/, // remote URL
+            ),
         invocation_start_marker: ($) => "<",
         invocation_end_marker: ($) => ">",
         parameters_start_marker: ($) => "(",

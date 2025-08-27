@@ -57,3 +57,8 @@
 (invocation_target) @function.technique.invocation
 (invocation_start_marker) @punctuation.technique.invocation
 (invocation_end_marker) @punctuation.technique.invocation
+
+; Keywords
+(repeat_keyword) @keyword.technique.repeat
+(foreach_keyword) @keyword.technique.foreach
+(in_keyword) @keyword.technique.in
