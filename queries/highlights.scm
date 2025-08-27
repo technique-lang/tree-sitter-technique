@@ -40,3 +40,10 @@
 ; Strings literals
 (string_marker) @punctuation.technique.quotes.string
 (string_text) @string.technique.string
+
+; Functions
+(function_name) @function.technique.application
+
+(parameters_start_marker) @punctuation.technique.structural.parameters
+(parameters_end_marker) @punctuation.technique.structural.parameters
+(parameters_separator_marker) @punctuation.technique.structural.parameters

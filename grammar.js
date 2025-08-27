@@ -275,7 +275,7 @@ module.exports = grammar({
         parameters_separator_marker: ($) => ",",
 
         // Function call
-        _application: ($) =>
+        application: ($) =>
             prec.left(
                 seq(
                     $.function_name,
@@ -285,7 +285,8 @@ module.exports = grammar({
                             $.variable,
                             $.string_literal,
                             $.numeric_literal,
-                            ",",
+                            $.multiline_literal,
+                            $.parameters_separator_marker,
                         ),
                     ),
                     $.parameters_end_marker,
