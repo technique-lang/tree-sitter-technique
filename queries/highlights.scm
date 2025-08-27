@@ -1,8 +1,9 @@
 ; Tree-sitter highlighting for Technique language
 ; Maps tokens to colors based on Syntax enum
 
-; Text - default. Note that we do NOT have a (text) rule or nothing based on
-; top of text would highlight!
+; Note that we do NOT have a (text) rule or nothing based on top of text would
+; highlight! We do roll the [hidden] (_text) rule up to various different
+; places so that they can still be mapped to the @text style here.
 (description) @text
 
 ; Headers - pragma - purple #75507b
@@ -84,3 +85,6 @@
 ; Code blocks
 (code_start_marker) @punctuation.technique.structural.code
 (code_end_marker) @punctuation.technique.structural.code
+
+; Numeric values, integral and quantity
+(numeric_literal) @number.technique.numeric

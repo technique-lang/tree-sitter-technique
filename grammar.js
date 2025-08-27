@@ -222,7 +222,10 @@ module.exports = grammar({
                 $.code_end_marker,
             ),
 
-        numeric_literal: ($) => /-?\d+(\.\d+)?/,
+        numeric_literal: ($) => choice(
+            /-?\d+(\.\d+)?\s*((±|\+\/-)\s*\d+(\.\d+)?)?\s*((×|x)\s*10((\^\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)))?\s+[a-zA-Z\/°]+/,
+            /-?\d+(\.\d+)?/,
+        ),
 
         // Multiline strings
         _multiline_literal: ($) =>
