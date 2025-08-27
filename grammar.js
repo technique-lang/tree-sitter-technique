@@ -7,25 +7,12 @@ module.exports = grammar({
     extras: ($) => [/[ \t]/],
 
     rules: {
-        // Overall document structure. Metadata, if present, followed by a
-        // Technique.
-        // source_file: ($) => seq(optional($.metadata), optional($._body)),
-        source_file: ($) => $._body,
-
-        _blank_line: ($) => "\n",
-        // Metadata block of headers
-        metadata: ($) => choice($.magic_line, $.spdx_line, $.template_line),
-
-        // Header lines are a single line ending with a newline
-        magic_line: ($) => seq("%", "technique", "v1", "\n"),
-        spdx_line: ($) => seq("!", /[^\n]+/, "\n"),
-        template_line: ($) => seq("&", /[^\n]+/, "\n"),
-
         // a Technique is either standalone Scopes (nested steps) or a series
         // of Procedures (which can contain nested steps). But for syntax
         // highlighting purposes we don't care about that structural
         // ambiguity. We're just going to detect lines.
-        _body: ($) =>
+
+        technique: ($) =>
             repeat1(
                 choice(
                     prec(9, $.metadata),
@@ -35,6 +22,16 @@ module.exports = grammar({
                     $.description,
                 ),
             ),
+
+        _blank_line: ($) => "\n",
+
+        // Metadata block of headers
+        metadata: ($) => choice($.magic_line, $.spdx_line, $.template_line),
+
+        // Header lines are a single line ending with a newline
+        magic_line: ($) => seq("%", "technique", "v1", "\n"),
+        spdx_line: ($) => seq("!", /[^\n]+/, "\n"),
+        template_line: ($) => seq("&", /[^\n]+/, "\n"),
 
         // Procedure declarations can be across multiple lines but are
         // terminated by (separated from subsequent content) a newline.
@@ -103,14 +100,27 @@ module.exports = grammar({
         _descriptive: ($) =>
             choice(
                 $.inline_text,
-                // $._code_inline,
+                $.inline_code,
                 // $._invocation,
                 // $._binding_inline,
             ),
 
         inline_text: ($) => $._text,
 
-        _text: ($) => token(prec(-1, /[^\n]+/)),
+        // To create the fallback we mark text as the lowest precedence and
+        // present it as a single token. This was crucial to allow the other
+        // line rules to be chosen.
+        _text: ($) => token(prec(-1, /[^\n{~]+/)),
+
+        // inline code within descriptive text
+        inline_code: ($) =>
+            seq(
+                $.code_start_marker,
+                optional($._expression),
+                $.code_end_marker,
+            ),
+        code_start_marker: ($) => "{",
+        code_end_marker: ($) => "}",
 
         // Scopes - the main structural elements within procedures
         _scope: ($) =>
@@ -150,8 +160,6 @@ module.exports = grammar({
                 2,
                 seq($.code_start_marker, $._expression, $.code_end_marker),
             ),
-        code_start_marker: ($) => "{",
-        code_end_marker: ($) => "}",
 
         // Role attributes only
         attribute: ($) => prec(2, seq("@", $.role_name, "\n")),
@@ -175,14 +183,6 @@ module.exports = grammar({
         // DESCRIPTIVES
 
         content: ($) => prec.left(seq($._descriptive)),
-
-        // Code inline within text
-        _code_inline: ($) =>
-            seq(
-                $.code_start_marker,
-                optional($._expression),
-                $.code_end_marker,
-            ),
 
         // Binding inline within text
         _binding_inline: ($) => seq($.binding_marker, $._arguments),

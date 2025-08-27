@@ -11,7 +11,8 @@
 ; Procedure declarations have structural characters as separators. Notably,
 ; the brackets or parenthesis around Genus are coloured as structural not as a
 ; part of the Forma.
-(declaration) @punctuation.technique.structural.declaration
+(procedure_name) @label.technqiue.declaration
+(declaration_marker) @punctuation.technique.structural.declaration
 (signature) @punctuation.technique.structural.signature
 (genus) @punctuation.technique.structural.genus
 
@@ -80,5 +81,6 @@
 (label_marker) @punctuation.technique.quotes.label
 (label_text) @text.technique.label
 
-; Variable - light blue #729fcf
-(variable) @variable.technique.identifier
+; Code blocks
+(code_start_marker) @punctuation.technique.structural.code
+(code_end_marker) @punctuation.technique.structural.code
