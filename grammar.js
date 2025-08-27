@@ -14,30 +14,31 @@ module.exports = grammar({
 
         _blank_line: ($) => "\n",
         // Metadata block of headers
-        metadata: ($) =>
-            choice($._magic_line, $._spdx_line, $._template_line),
+        metadata: ($) => choice($.magic_line, $.spdx_line, $.template_line),
 
         // Header lines are a single line ending with a newline
-        _magic_line: ($) => seq("%", "technique", "v1", "\n"),
-        _spdx_line: ($) => seq("!", /[^\n]+/, "\n"),
-        _template_line: ($) => seq("&", /[^\n]+/, "\n"),
+        magic_line: ($) => seq("%", "technique", "v1", "\n"),
+        spdx_line: ($) => seq("!", /[^\n]+/, "\n"),
+        template_line: ($) => seq("&", /[^\n]+/, "\n"),
 
         // a Technique is either standalone Scopes (nested steps) or a series
-        // of Procedures (which can contain nested steps). But for syntax highlighting purposes
-        // we don't care about that structural ambiguity. We're just going to detect lines.
+        // of Procedures (which can contain nested steps). But for syntax
+        // highlighting purposes we don't care about that structural
+        // ambiguity. We're just going to detect lines.
         _body: ($) =>
             repeat1(
                 choice(
-                    prec(10, $.metadata),
-                    prec(9, $._declaration),
+                    prec(9, $.metadata),
+                    prec(8, $.declaration),
                     prec(1, $._blank_line),
+                    prec(2, $.title),
                     $.description,
                 ),
             ),
 
         // Procedure declarations can be across multiple lines but are
         // terminated by (separated from subsequent content) a newline.
-        _declaration: ($) =>
+        declaration: ($) =>
             seq(
                 $.procedure_name,
                 optional($._parameters),
@@ -89,9 +90,10 @@ module.exports = grammar({
         forma: ($) => /[A-Z][a-zA-Z0-9]*/,
 
         // Procedure title
+        title: ($) => $._procedure_title,
         _procedure_title: ($) => seq($.title_marker, $.title_text, "\n"),
-        title_marker: ($) => prec(5, "#"),
-        title_text: ($) => /[^\n]*/,
+        title_marker: ($) => "#",
+        title_text: ($) => $._text,
 
         description: ($) => $._paragraph_line,
 
@@ -100,14 +102,16 @@ module.exports = grammar({
 
         _descriptive: ($) =>
             choice(
-                $._text_inline,
+                $.inline_text,
                 // $._code_inline,
                 // $._invocation,
                 // $._binding_inline,
             ),
 
-        _text_inline: ($) =>
-            alias(token(prec(-1, /[^\n]+/)), $.text),
+        inline_text: ($) => $._text,
+
+        _text: ($) => token(prec(-1, /[^\n]+/)),
+
         // Scopes - the main structural elements within procedures
         _scope: ($) =>
             choice(

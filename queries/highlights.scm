@@ -1,7 +1,8 @@
 ; Tree-sitter highlighting for Technique language
 ; Maps tokens to colors based on Syntax enum
 
-; Text - default
+; Text - default. Note that we do NOT have a (text) rule or nothing based on
+; top of text would highlight!
 (description) @text
 
 ; Headers - pragma - purple #75507b
