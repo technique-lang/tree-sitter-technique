@@ -209,10 +209,13 @@ module.exports = grammar({
         string_literal: ($) =>
             seq(
                 $.string_marker,
-                repeat(choice(/[^"{}]+/, $._interpolation)),
+                repeat(choice($.string_text, $._interpolation)),
                 $.string_marker,
             ),
         string_marker: ($) => '"',
+        string_text: ($) => $._string,
+
+        _string: ($) => token(prec(-1, /[^"{}]+/)),
 
         // String interpolation supports expressions
         _interpolation: ($) =>
@@ -222,10 +225,11 @@ module.exports = grammar({
                 $.code_end_marker,
             ),
 
-        numeric_literal: ($) => choice(
-            /-?\d+(\.\d+)?\s*((±|\+\/-)\s*\d+(\.\d+)?)?\s*((×|x)\s*10((\^\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)))?\s+[a-zA-Z\/°]+/,
-            /-?\d+(\.\d+)?/,
-        ),
+        numeric_literal: ($) =>
+            choice(
+                /-?\d+(\.\d+)?\s*((±|\+\/-)\s*\d+(\.\d+)?)?\s*((×|x)\s*10((\^\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)))?\s+[a-zA-Z\/°]+/,
+                /-?\d+(\.\d+)?/,
+            ),
 
         // Multiline strings
         _multiline_literal: ($) =>
