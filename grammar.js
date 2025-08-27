@@ -204,7 +204,6 @@ module.exports = grammar({
         _expression: ($) =>
             choice(
                 $.variable,
-
                 $.repeat_expression,
                 $.foreach_expression,
                 $.invocation,
@@ -213,7 +212,7 @@ module.exports = grammar({
                 $.numeric_literal,
                 $.multiline_literal,
                 $.binding_expression,
-                // $._tablet,
+                $.tablet,
             ),
 
         variable: ($) => $._identifier,
@@ -348,20 +347,23 @@ module.exports = grammar({
             prec(2, seq($.repeat_keyword, $._expression)),
 
         // Tablet - key-value pairs in brackets
-        _tablet: ($) =>
+        tablet: ($) =>
             seq(
                 $.tablet_start_marker,
+                optional(/\n+/), // Allow newlines after opening bracket
                 optional(
-                    seq($._tablet_pair, repeat(seq("\n", $._tablet_pair))),
+                    seq($.tablet_pair, repeat(seq(/\n+/, $.tablet_pair))),
                 ),
+                optional(/\n+/), // Allow newlines before closing bracket
                 $.tablet_end_marker,
             ),
 
-        _tablet_pair: ($) =>
-            seq($._label, $.tablet_equals_marker, $._expression),
-        _label: ($) => seq($.label_marker, $.label_text, $.label_marker),
+        tablet_pair: ($) =>
+            seq($.tablet_label, $.tablet_equals_marker, $._expression),
+        tablet_label: ($) =>
+            seq($.label_marker, $.label_text, $.label_marker),
         label_marker: ($) => '"',
-        label_text: ($) => /[^"]*/,
+        label_text: ($) => $._string,
         tablet_start_marker: ($) => "[",
         tablet_equals_marker: ($) => "=",
         tablet_end_marker: ($) => "]",
