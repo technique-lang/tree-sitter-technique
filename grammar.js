@@ -16,10 +16,11 @@ module.exports = grammar({
             repeat1(
                 choice(
                     prec(9, $.metadata),
-                    prec(8, $.declaration),
-                    prec(1, $._blank_line),
-                    prec(2, $.title),
-                    $.description,
+                    prec(6, $.step),
+                    prec(5, $.title),
+                    prec(3, $.description),
+                    prec(2, $._blank_line),
+                    prec(1, $.declaration),
                 ),
             ),
 
@@ -133,25 +134,32 @@ module.exports = grammar({
         code_start_marker: ($) => "{",
         code_end_marker: ($) => "}",
 
-        // Scopes - the main structural elements within procedures
-        _scope: ($) =>
-            choice(
-                $._step_block,
-                $.code_block,
-                $.attribute,
-                $._section_chunk,
-                $._response_block,
-            ),
-
         // Section chunks - roman numeral sections
         _section_chunk: ($) => seq($.section_marker, $.section_text),
 
         section_marker: ($) => /[IVX]+ /,
         section_text: ($) => /[^\n]*/, // FIXME descriptive?
 
-        // Step blocks - higher precedence than paragraphs
-        // Matches both numbered steps (1. 2. etc) and parallel steps (-)
-        _step_block: ($) => seq(prec(2, $.step_marker), $.content),
+        // Because of the limitations of Tree Sitter and its inability to do
+        // lookahead, we can't nest the steps like you'd expect given the
+        // ambiguity of the grammar. So we parse them line at a time (which is
+        // sufficient for syntax highlighting needs anyway) whereby they can
+        // be either the first line of a step (with dependent or parallel step
+        // marker) or are one of the subsequent lines of content (being lines
+        // without such a marker).
+        step: ($) =>
+            choice(seq($.step_firstline, "\n"), seq($.step_continued, "\n")),
+
+        step_firstline: ($) =>
+            seq(optional(/[ \t]+/), $.step_marker, $.step_content),
+
+        step_continued: ($) =>
+            seq(
+                /[ \t]+/, // Leading whitespace (required for continuations)
+                $.step_content,
+            ),
+
+        step_content: ($) => repeat1($._descriptive),
 
         step_marker: ($) =>
             choice(
@@ -192,8 +200,6 @@ module.exports = grammar({
             seq(/[^'\n]*/, $.response_marker, /[^']*/, $.response_marker),
 
         // DESCRIPTIVES
-
-        content: ($) => prec.left(seq($._descriptive)),
 
         // Binding inline within text
         _binding_inline: ($) => seq($.binding_marker, $._arguments),

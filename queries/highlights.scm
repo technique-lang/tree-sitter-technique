@@ -30,6 +30,9 @@
 (title_marker) @preproc.technique.title
 (title_text) @title.technique.title
 
+; Step items - bright white
+(step_marker) @punctuation.list_marker.technique.step_item
+
 ; Code blocks
 (code_start_marker) @punctuation.technique.code
 (code_end_marker) @punctuation.technique.code
