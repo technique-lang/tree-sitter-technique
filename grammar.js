@@ -6,8 +6,6 @@ module.exports = grammar({
 
     extras: ($) => [/[ \t]/],
 
-    conflicts: ($) => [[$.paragraph]],
-
     rules: {
         // Overall document structure. Metadata, if present, followed by a
         // Technique.
@@ -27,31 +25,25 @@ module.exports = grammar({
         // a Technique is either standalone Scopes (nested steps) or a series
         // of Procedures (which can contain nested steps). But for syntax highlighting purposes
         // we don't care about that structural ambiguity. We're just going to detect lines.
-        _body: ($) => repeat1(choice($.metadata, $._declaration, $._blank_line)),
-
-        // Procedure with optional title, description, and scopes
-        _procedure: ($) =>
-            prec.left(
-                seq(
-                    $._declaration,
-                    optional($._procedure_title),
-                    optional($.description),
-                    repeat($._scope),
+        _body: ($) =>
+            repeat1(
+                choice(
+                    prec(10, $.metadata),
+                    prec(9, $._declaration),
+                    prec(1, $._blank_line),
+                    $.description,
                 ),
             ),
 
         // Procedure declarations can be across multiple lines but are
         // terminated by (separated from subsequent content) a newline.
         _declaration: ($) =>
-            prec(
-                2,
-                seq(
-                    $.procedure_name,
-                    optional($._parameters),
-                    $.declaration_marker,
-                    optional($.signature),
-                    "\n",
-                ),
+            seq(
+                $.procedure_name,
+                optional($._parameters),
+                $.declaration_marker,
+                optional($.signature),
+                "\n",
             ),
 
         procedure_name: ($) => $._identifier,
@@ -101,9 +93,21 @@ module.exports = grammar({
         title_marker: ($) => prec(5, "#"),
         title_text: ($) => /[^\n]*/,
 
-        // Description - one or more paragraphs
-        description: ($) => prec.left(seq($.paragraph, repeat($.paragraph))),
+        description: ($) => $._paragraph_line,
 
+        // Paragraph - any line that's not empty
+        _paragraph_line: ($) => seq(repeat1($._descriptive), "\n"),
+
+        _descriptive: ($) =>
+            choice(
+                $._text_inline,
+                // $._code_inline,
+                // $._invocation,
+                // $._binding_inline,
+            ),
+
+        _text_inline: ($) =>
+            alias(token(prec(-1, /[^\n]+/)), $.text),
         // Scopes - the main structural elements within procedures
         _scope: ($) =>
             choice(
@@ -166,18 +170,7 @@ module.exports = grammar({
 
         // DESCRIPTIVES
 
-        content: ($) => prec.left(seq($.paragraph, repeat($.paragraph))),
-
-        // Paragraph - any line that's not empty (conflicts will resolve to structural elements)
-        paragraph: ($) => repeat1($._descriptive),
-
-        _descriptive: ($) =>
-            choice(
-                $._text_inline,
-                $._code_inline,
-                $._invocation,
-                $._binding_inline,
-            ),
+        content: ($) => prec.left(seq($._descriptive)),
 
         // Code inline within text
         _code_inline: ($) =>
@@ -190,8 +183,6 @@ module.exports = grammar({
         // Binding inline within text
         _binding_inline: ($) => seq($.binding_marker, $._arguments),
         binding_marker: ($) => "~",
-
-        _text_inline: ($) => /[^\n]+/,
 
         // EXPRESSIONS
 

@@ -2,10 +2,7 @@
 ; Maps tokens to colors based on Syntax enum
 
 ; Text - default
-(description) @text.technique.text.description
-
-(paragraph) @text.technique.text.descriptive
-
+(description) @text
 
 ; Headers - pragma - purple #75507b
 (metadata) @preproc.technique.metadata
