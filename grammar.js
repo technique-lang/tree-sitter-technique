@@ -18,6 +18,7 @@ module.exports = grammar({
                     prec(9, $.metadata),
                     prec(6, $.step),
                     prec(5, $.title),
+                    prec(5, $.section),
                     prec(4, $.attributes),
                     prec(4, $.responses),
                     prec(2, $.declaration),
@@ -134,11 +135,11 @@ module.exports = grammar({
         code_start_marker: ($) => "{",
         code_end_marker: ($) => "}",
 
-        // Section chunks - roman numeral sections
-        _section_chunk: ($) => seq($.section_marker, $.section_text),
+        // Sections are step-like lines beginning with capital roman numerals.
+        section: ($) => seq($.section_marker, $.section_text, "\n"),
 
-        section_marker: ($) => /[IVX]+ /,
-        section_text: ($) => /[^\n]*/, // FIXME descriptive?
+        section_marker: ($) => /[IVX]+\. /,
+        section_text: ($) => repeat1($._descriptive),
 
         // Because of the limitations of Tree Sitter and its inability to do
         // lookahead, we can't nest the steps like you'd expect given the
