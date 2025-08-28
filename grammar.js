@@ -18,6 +18,7 @@ module.exports = grammar({
                     prec(9, $.metadata),
                     prec(6, $.step),
                     prec(5, $.title),
+                    prec(4, $.responses),
                     prec(3, $.description),
                     prec(2, $._blank_line),
                     prec(1, $.declaration),
@@ -57,7 +58,7 @@ module.exports = grammar({
             seq(
                 $.parameters_start_marker,
                 $.variable,
-                repeat(seq($.parameters_separator_marker, $.variable)),
+                repeat(seq($.parameters_separator, $.variable)),
                 $.parameters_end_marker,
             ),
 
@@ -186,18 +187,29 @@ module.exports = grammar({
         role_name: ($) => $._identifier,
 
         // Response lines
-        _response_block: ($) =>
+        responses: ($) =>
+            seq(
+                optional(/[ \t]+/), // Allow leading whitespace
+                $.response,
+                repeat(seq($.response_separator, $.response)),
+                "\n",
+            ),
+
+        response: ($) =>
             seq(
                 $.response_marker,
                 $.response_value,
                 $.response_marker,
                 optional($.response_condition),
-                "\n",
             ),
+
+        response_condition: ($) => $._condition,
+
+        _condition: ($) => token(prec(-1, /[^|\n]+/)), // Condition text, stop at | or newline
+
+        response_separator: ($) => "|",
         response_marker: ($) => "'",
         response_value: ($) => /[^']*/,
-        response_condition: ($) =>
-            seq(/[^'\n]*/, $.response_marker, /[^']*/, $.response_marker),
 
         // DESCRIPTIVES
 
@@ -278,7 +290,7 @@ module.exports = grammar({
                                     $.variable,
                                     $.string_literal,
                                     $.numeric_literal,
-                                    ",",
+                                    $.parameters_separator,
                                 ),
                             ),
                             $.parameters_end_marker,
@@ -295,7 +307,7 @@ module.exports = grammar({
         invocation_end_marker: ($) => ">",
         parameters_start_marker: ($) => "(",
         parameters_end_marker: ($) => ")",
-        parameters_separator_marker: ($) => ",",
+        parameters_separator: ($) => ",",
 
         // Function call
         application: ($) =>
@@ -309,7 +321,7 @@ module.exports = grammar({
                             $._expression,
                             repeat(
                                 seq(
-                                    $.parameters_separator_marker,
+                                    $.parameters_separator,
                                     optional(/\n+/),
                                     $._expression,
                                 ),
@@ -339,7 +351,7 @@ module.exports = grammar({
                 seq(
                     $.parameters_start_marker,
                     $.variable,
-                    repeat(seq($.parameters_separator_marker, $.variable)),
+                    repeat(seq($.parameters_separator, $.variable)),
                     $.parameters_end_marker,
                 ),
             ),

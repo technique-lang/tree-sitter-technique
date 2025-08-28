@@ -22,7 +22,7 @@
 
 (parameters_start_marker) @punctuation.technique.parameters
 (parameters_end_marker) @punctuation.technique.parameters
-(parameters_separator_marker) @punctuation.technique.parameters
+(parameters_separator) @punctuation.technique.parameters
 
 (variable) @variable.technique.identifier
 
@@ -54,7 +54,7 @@
 
 (parameters_start_marker) @punctuation.technique.parameters
 (parameters_end_marker) @punctuation.technique.parameters
-(parameters_separator_marker) @punctuation.technique.parameters
+(parameters_separator) @punctuation.technique.parameters
 
 ; Invocations
 (invocation_target) @function.technique.invocation
@@ -71,3 +71,8 @@
 (tablet_end_marker) @punctuation.technique.tablet
 (label_marker) @punctuation.technique.quotes.tablet
 (label_text) @label.technique.label
+
+; Response options
+(response_marker) @punctuation.technique.quotes.response
+(response_separator) @punctuation.technique.response
+(response_value) @variant.technique.response
