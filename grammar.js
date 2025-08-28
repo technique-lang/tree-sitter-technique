@@ -20,9 +20,9 @@ module.exports = grammar({
                     prec(5, $.title),
                     prec(4, $.attributes),
                     prec(4, $.responses),
-                    prec(3, $.description),
-                    prec(2, $._blank_line),
-                    prec(1, $.declaration),
+                    prec(2, $.declaration),
+                    prec(1, $.description),
+                    prec(0, $._blank_line),
                 ),
             ),
 
@@ -90,30 +90,30 @@ module.exports = grammar({
         forma: ($) => /[A-Z][a-zA-Z0-9]*/,
 
         // Procedure title
-        title: ($) => $._procedure_title,
-        _procedure_title: ($) => seq($.title_marker, $.title_text, "\n"),
+        title: ($) => seq($.title_marker, $.title_text, "\n"),
         title_marker: ($) => "#",
-        title_text: ($) => $._text,
+        title_text: ($) => repeat1($._descriptive),
 
-        description: ($) => $._paragraph_line,
+        // Description - any line with descriptive content
 
-        // Paragraph - any line that's not empty
-        _paragraph_line: ($) => seq(repeat1($._descriptive), "\n"),
+        description: ($) => seq(repeat1($._descriptive), "\n"),
 
         _descriptive: ($) =>
             choice(
                 $.inline_text,
                 $.inline_code,
-                // $._invocation,
+                // $.invocation,
                 $.inline_binding,
             ),
 
-        inline_text: ($) => $._text,
-
-        // To create the fallback we mark text as the lowest precedence and
-        // present it as a single token. This was crucial to allow the other
-        // line rules to be chosen.
-        _text: ($) => token(prec(-1, /[^\n{~]+/)),
+        // It is insanely non-intuitive how this works: $._identifier HAS to
+        // be here, so that it can compete with the match that would happen in
+        // the declaration rule. Since the token(prec()) match is longer it is
+        // chosen. There is an ugly corner case where a line being a single
+        // word only would miss the token(prec()) branch so we wrap all of
+        // this in a name that covers both.
+        inline_text: ($) =>
+            choice($._identifier, token(prec(-1, /[^\s\n{~][^\n{~]*/))),
 
         // inline code within descriptive text. We have to jump through some
         // additional hoops to relax and support multiline constructs
