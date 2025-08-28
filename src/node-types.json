@@ -216,14 +216,22 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "inline_binding",
+          "named": true
+        },
         {
           "type": "inline_code",
           "named": true
         },
         {
           "type": "inline_text",
+          "named": true
+        },
+        {
+          "type": "invocation",
           "named": true
         }
       ]
@@ -301,6 +309,11 @@
     }
   },
   {
+    "type": "forma",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "function_name",
     "named": true,
     "fields": {}
@@ -311,10 +324,41 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "forma",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inline_binding",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binding_marker",
+          "named": true
+        },
+        {
+          "type": "parameters_end_marker",
+          "named": true
+        },
+        {
+          "type": "parameters_separator",
+          "named": true
+        },
+        {
+          "type": "parameters_start_marker",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -681,11 +725,19 @@
       "required": true,
       "types": [
         {
+          "type": "inline_binding",
+          "named": true
+        },
+        {
           "type": "inline_code",
           "named": true
         },
         {
           "type": "inline_text",
+          "named": true
+        },
+        {
+          "type": "invocation",
           "named": true
         }
       ]
@@ -985,7 +1037,29 @@
   {
     "type": "title_text",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "inline_binding",
+          "named": true
+        },
+        {
+          "type": "inline_code",
+          "named": true
+        },
+        {
+          "type": "inline_text",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "variable",
@@ -1058,10 +1132,6 @@
   },
   {
     "type": "foreach_keyword",
-    "named": true
-  },
-  {
-    "type": "forma",
     "named": true
   },
   {
