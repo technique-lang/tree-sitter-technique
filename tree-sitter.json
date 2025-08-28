@@ -10,9 +10,8 @@
     }
   ],
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.1.2",
     "license": "MIT",
-    "description": "Tree-sitter grammar for Technique procedure language",
-    "author": "Andrew Cowie <istathar@gmail.com>"
+    "description": "Tree-sitter grammar for Technique procedure language"
   }
 }
