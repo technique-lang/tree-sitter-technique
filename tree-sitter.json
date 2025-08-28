@@ -4,7 +4,7 @@
       "name": "technique",
       "scope": "source.technique",
       "path": ".",
-      "file-types": ["t", "tq", "technique"],
+      "file-types": ["tq", "technique"],
       "highlights": "queries/highlights.scm",
       "injection-regex": "^(technique|tq)$"
     }
