@@ -70,14 +70,12 @@ module.exports = grammar({
         // Genus encompass simple and compound types
         genus: ($) =>
             choice(
-                $._unit_genus,
                 $._simple_genus,
                 $._list_genus,
                 $._tuple_genus,
                 $._naked_genus,
             ),
 
-        _unit_genus: ($) => "()",
         _simple_genus: ($) => $.forma,
         _list_genus: ($) => seq("[", $.forma, "]"),
         _tuple_genus: ($) =>
@@ -86,8 +84,8 @@ module.exports = grammar({
         _naked_genus: ($) =>
             seq($.forma, ",", $.forma, repeat(seq(",", $.forma))),
 
-        // Forma, a basic type
-        forma: ($) => /[A-Z][a-zA-Z0-9]*/,
+        // Forma, the basic type
+        forma: ($) => choice(/[A-Z][a-zA-Z0-9]*/, "()"),
 
         // Procedure title
         title: ($) => seq($.title_marker, $.title_text, "\n"),
