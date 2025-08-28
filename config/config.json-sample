@@ -1,0 +1,131 @@
+{
+  "parser-directories": [
+    "/home/andrew/src/technique-lang"
+  ],
+  "theme": {
+    "attribute": {
+      "color": "#ffffff",
+      "bold": true
+    },
+    "comment": {
+      "color": 66,
+      "italic": true
+    },
+    "constant": {
+      "color": "#ad7fa8",
+      "bold": true
+    },
+    "constant.builtin": {
+      "bold": true,
+      "color": "#ad7fa8"
+    },
+    "constructor": {
+      "color": "#3465a4",
+      "bold": true
+    },
+    "embedded": {
+      "color": "#c4a000",
+      "bold": true
+    },
+    "function": {
+      "color": "#3b5d7d",
+      "bold": true
+    },
+    "function.builtin": {
+      "color": "#3465a4",
+      "bold": true
+    },
+    "keyword": {
+      "color": "#75507b",
+      "bold": true
+    },
+    "label": {
+      "color": "#60989a",
+      "bold": true
+    },
+    "module": "#8f5902",
+    "number": {
+      "color": "#ad7fa8",
+      "bold": true
+    },
+    "operator": {
+      "color": "#cc0000",
+      "bold": true
+    },
+    "preproc": {
+      "color": "#75507b"
+    },
+    "procedure_name": {
+      "color": "#3465a4",
+      "bold": true
+    },
+    "property": {
+      "color": "#729fcf",
+      "bold": true
+    },
+    "property.builtin": {
+      "bold": true,
+      "color": "#729fcf"
+    },
+    "punctuation": {
+      "color": "#999999",
+      "bold": true
+    },
+    "punctuation.bracket": "#999999",
+    "punctuation.delimiter": "#999999",
+    "punctuation.list_marker": {
+      "color": "#ffffff",
+      "bold": true
+    },
+    "punctuation.special": "#999999",
+    "string": {
+      "color": "#4e9a06",
+      "bold": true
+    },
+    "string.special": {
+      "color": "#4e9a06",
+      "bold": true
+    },
+    "string.multiline": {
+      "color": "#4e9a06",
+      "bold": true
+    },
+    "string.quoted": {
+      "color": "#f57900",
+      "bold": true
+    },
+    "tag": {
+      "color": "#75507b",
+      "bold": true
+    },
+    "text": "#ffffff",
+    "title": {
+      "color": "#ffffff",
+      "bold": true
+    },
+    "type": {
+      "color": "#8f5902",
+      "bold": true
+    },
+    "type.builtin": {
+      "bold": true,
+      "color": "#8f5902"
+    },
+    "variable": {
+      "color": "#729fcf",
+      "bold": true
+    },
+    "variable.builtin": {
+      "bold": true,
+      "color": "#729fcf"
+    },
+    "variable.parameter": {
+      "color": "#729fcf",
+      "bold": true
+    },
+    "variant": {
+      "color": "#f57900",
+      "bold": true
+    }
+  }
+}
