@@ -26,6 +26,8 @@
 
 (variable) @variable.technique.identifier
 
+(binding_marker) @punctuation.technique.binding
+
 ; Procedures then have titles, descriptions, and then steps.
 (title_marker) @preproc.technique.title
 (title_text) @title.technique.title
