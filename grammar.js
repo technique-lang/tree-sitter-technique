@@ -105,7 +105,7 @@ module.exports = grammar({
                 $.inline_text,
                 $.inline_code,
                 // $._invocation,
-                // $._binding_inline,
+                $.inline_binding,
             ),
 
         inline_text: ($) => $._text,
@@ -224,7 +224,7 @@ module.exports = grammar({
         // DESCRIPTIVES
 
         // Binding inline within text
-        _binding_inline: ($) => seq($.binding_marker, $._arguments),
+        inline_binding: ($) => seq($.binding_marker, $._arguments),
         binding_marker: ($) => "~",
 
         // EXPRESSIONS
