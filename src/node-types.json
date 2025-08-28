@@ -8,7 +8,27 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "function_name",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
           "named": true
         },
         {
@@ -20,73 +40,11 @@
           "named": true
         },
         {
+          "type": "parameters_separator",
+          "named": true
+        },
+        {
           "type": "parameters_start_marker",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "attribute",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "code_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "application",
-          "named": true
-        },
-        {
-          "type": "code_end_marker",
-          "named": true
-        },
-        {
-          "type": "code_start_marker",
-          "named": true
-        },
-        {
-          "type": "foreach_expression",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "multiline_language",
-          "named": true
-        },
-        {
-          "type": "multiline_marker",
-          "named": true
-        },
-        {
-          "type": "multiline_string",
-          "named": true
-        },
-        {
-          "type": "numeric_literal",
           "named": true
         },
         {
@@ -98,6 +56,10 @@
           "named": true
         },
         {
+          "type": "tablet",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -105,17 +67,7 @@
     }
   },
   {
-    "type": "code_end_marker",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "code_start_marker",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "content",
+    "type": "attribute",
     "named": true,
     "fields": {},
     "children": {
@@ -123,7 +75,97 @@
       "required": true,
       "types": [
         {
-          "type": "paragraph",
+          "type": "role_marker",
+          "named": true
+        },
+        {
+          "type": "role_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attributes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "attribute_joiner",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "binding_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "binding_marker",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "parameters_end_marker",
+          "named": true
+        },
+        {
+          "type": "parameters_separator",
+          "named": true
+        },
+        {
+          "type": "parameters_start_marker",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -138,15 +180,31 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "declaration_marker",
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameters_end_marker",
+          "named": true
+        },
+        {
+          "type": "parameters_separator",
+          "named": true
+        },
+        {
+          "type": "parameters_start_marker",
+          "named": true
+        },
+        {
+          "type": "procedure_name",
           "named": true
         },
         {
           "type": "signature",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -158,10 +216,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "paragraph",
+          "type": "inline_code",
+          "named": true
+        },
+        {
+          "type": "inline_text",
           "named": true
         }
       ]
@@ -177,6 +239,10 @@
       "types": [
         {
           "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
           "named": true
         },
         {
@@ -196,15 +262,7 @@
           "named": true
         },
         {
-          "type": "multiline_language",
-          "named": true
-        },
-        {
-          "type": "multiline_marker",
-          "named": true
-        },
-        {
-          "type": "multiline_string",
+          "type": "multiline_literal",
           "named": true
         },
         {
@@ -212,7 +270,11 @@
           "named": true
         },
         {
-          "type": "parameters_separator_marker",
+          "type": "parameters_end_marker",
+          "named": true
+        },
+        {
+          "type": "parameters_separator",
           "named": true
         },
         {
@@ -228,11 +290,20 @@
           "named": true
         },
         {
+          "type": "tablet",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "function_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "genus",
@@ -250,58 +321,7 @@
     }
   },
   {
-    "type": "interpolation",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "application",
-          "named": true
-        },
-        {
-          "type": "foreach_expression",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "multiline_language",
-          "named": true
-        },
-        {
-          "type": "multiline_marker",
-          "named": true
-        },
-        {
-          "type": "multiline_string",
-          "named": true
-        },
-        {
-          "type": "numeric_literal",
-          "named": true
-        },
-        {
-          "type": "repeat_expression",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "invocation",
+    "type": "inline_code",
     "named": true,
     "fields": {},
     "children": {
@@ -309,55 +329,11 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "invocation_end_marker",
-          "named": true
-        },
-        {
-          "type": "invocation_start_marker",
-          "named": true
-        },
-        {
-          "type": "numeric_literal",
-          "named": true
-        },
-        {
-          "type": "parameters_end_marker",
-          "named": true
-        },
-        {
-          "type": "parameters_start_marker",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "metadata",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "paragraph",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
           "type": "application",
           "named": true
         },
         {
-          "type": "binding_marker",
+          "type": "binding_expression",
           "named": true
         },
         {
@@ -373,23 +349,11 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "invocation",
           "named": true
         },
         {
-          "type": "multiline_language",
-          "named": true
-        },
-        {
-          "type": "multiline_marker",
-          "named": true
-        },
-        {
-          "type": "multiline_string",
+          "type": "multiline_literal",
           "named": true
         },
         {
@@ -405,6 +369,10 @@
           "named": true
         },
         {
+          "type": "tablet",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -412,7 +380,12 @@
     }
   },
   {
-    "type": "parameters",
+    "type": "inline_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "invocation",
     "named": true,
     "fields": {},
     "children": {
@@ -420,11 +393,114 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "invocation_end_marker",
+          "named": true
+        },
+        {
+          "type": "invocation_start_marker",
+          "named": true
+        },
+        {
+          "type": "invocation_target",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "parameters_end_marker",
+          "named": true
+        },
+        {
+          "type": "parameters_separator",
+          "named": true
+        },
+        {
+          "type": "parameters_start_marker",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "invocation_target",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "label_marker",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "label_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "magic_line",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "metadata",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "magic_line",
+          "named": true
+        },
+        {
+          "type": "spdx_line",
+          "named": true
+        },
+        {
+          "type": "template_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multiline_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "multiline_content",
+          "named": true
+        },
+        {
+          "type": "multiline_language",
+          "named": true
+        },
+        {
+          "type": "multiline_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "numeric_literal",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "parameters_end_marker",
@@ -432,12 +508,17 @@
     "fields": {}
   },
   {
-    "type": "parameters_separator_marker",
+    "type": "parameters_separator",
     "named": true,
     "fields": {}
   },
   {
     "type": "parameters_start_marker",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "procedure_name",
     "named": true,
     "fields": {}
   },
@@ -454,6 +535,10 @@
           "named": true
         },
         {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -462,15 +547,7 @@
           "named": true
         },
         {
-          "type": "multiline_language",
-          "named": true
-        },
-        {
-          "type": "multiline_marker",
-          "named": true
-        },
-        {
-          "type": "multiline_string",
+          "type": "multiline_literal",
           "named": true
         },
         {
@@ -490,7 +567,34 @@
           "named": true
         },
         {
+          "type": "tablet",
+          "named": true
+        },
+        {
           "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "response",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "response_condition",
+          "named": true
+        },
+        {
+          "type": "response_marker",
+          "named": true
+        },
+        {
+          "type": "response_value",
           "named": true
         }
       ]
@@ -499,25 +603,29 @@
   {
     "type": "response_condition",
     "named": true,
+    "fields": {}
+  },
+  {
+    "type": "responses",
+    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "response_marker",
+          "type": "response",
+          "named": true
+        },
+        {
+          "type": "response_separator",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "response_value",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "section_text",
+    "type": "role_name",
     "named": true,
     "fields": {}
   },
@@ -532,73 +640,86 @@
         {
           "type": "genus",
           "named": true
+        },
+        {
+          "type": "signature_marker",
+          "named": true
         }
       ]
     }
   },
   {
-    "type": "source_file",
+    "type": "spdx_line",
     "named": true,
-    "root": true,
+    "fields": {}
+  },
+  {
+    "type": "step",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "step_continued",
+          "named": true
+        },
+        {
+          "type": "step_firstline",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "step_content",
+    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "attribute",
+          "type": "inline_code",
           "named": true
         },
         {
-          "type": "code_block",
+          "type": "inline_text",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "step_continued",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
         {
-          "type": "content",
+          "type": "step_content",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "step_firstline",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
         {
-          "type": "declaration",
-          "named": true
-        },
-        {
-          "type": "description",
-          "named": true
-        },
-        {
-          "type": "metadata",
-          "named": true
-        },
-        {
-          "type": "response_condition",
-          "named": true
-        },
-        {
-          "type": "response_marker",
-          "named": true
-        },
-        {
-          "type": "response_value",
-          "named": true
-        },
-        {
-          "type": "section_marker",
-          "named": true
-        },
-        {
-          "type": "section_text",
+          "type": "step_content",
           "named": true
         },
         {
           "type": "step_marker",
-          "named": true
-        },
-        {
-          "type": "title_marker",
-          "named": true
-        },
-        {
-          "type": "title_text",
           "named": true
         }
       ]
@@ -618,20 +739,248 @@
       "required": true,
       "types": [
         {
-          "type": "interpolation",
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "code_end_marker",
+          "named": true
+        },
+        {
+          "type": "code_start_marker",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
           "named": true
         },
         {
           "type": "string_marker",
+          "named": true
+        },
+        {
+          "type": "string_text",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "title_marker",
+    "type": "string_marker",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "string_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tablet",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "tablet_end_marker",
+          "named": true
+        },
+        {
+          "type": "tablet_pair",
+          "named": true
+        },
+        {
+          "type": "tablet_start_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tablet_end_marker",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tablet_label",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label_marker",
+          "named": true
+        },
+        {
+          "type": "label_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tablet_pair",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tablet",
+          "named": true
+        },
+        {
+          "type": "tablet_equals_marker",
+          "named": true
+        },
+        {
+          "type": "tablet_label",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tablet_start_marker",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "technique",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "attributes",
+          "named": true
+        },
+        {
+          "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "metadata",
+          "named": true
+        },
+        {
+          "type": "responses",
+          "named": true
+        },
+        {
+          "type": "step",
+          "named": true
+        },
+        {
+          "type": "title",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "template_line",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "title",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "title_marker",
+          "named": true
+        },
+        {
+          "type": "title_text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "title_text",
@@ -641,17 +990,7 @@
   {
     "type": "variable",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "\n",
@@ -662,7 +1001,7 @@
     "named": false
   },
   {
-    "type": "#",
+    "type": "\"",
     "named": false
   },
   {
@@ -690,18 +1029,6 @@
     "named": false
   },
   {
-    "type": "->",
-    "named": false
-  },
-  {
-    "type": ":",
-    "named": false
-  },
-  {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "[",
     "named": false
   },
@@ -710,7 +1037,23 @@
     "named": false
   },
   {
+    "type": "attribute_joiner",
+    "named": true
+  },
+  {
     "type": "binding_marker",
+    "named": true
+  },
+  {
+    "type": "code_end_marker",
+    "named": true
+  },
+  {
+    "type": "code_start_marker",
+    "named": true
+  },
+  {
+    "type": "declaration_marker",
     "named": true
   },
   {
@@ -719,10 +1062,6 @@
   },
   {
     "type": "forma",
-    "named": true
-  },
-  {
-    "type": "identifier",
     "named": true
   },
   {
@@ -738,19 +1077,15 @@
     "named": true
   },
   {
+    "type": "multiline_content",
+    "named": true
+  },
+  {
     "type": "multiline_language",
     "named": true
   },
   {
     "type": "multiline_marker",
-    "named": true
-  },
-  {
-    "type": "multiline_string",
-    "named": true
-  },
-  {
-    "type": "numeric_literal",
     "named": true
   },
   {
@@ -762,11 +1097,23 @@
     "named": true
   },
   {
-    "type": "section_marker",
+    "type": "response_separator",
     "named": true
   },
   {
-    "type": "string_marker",
+    "type": "response_value",
+    "named": true
+  },
+  {
+    "type": "role_marker",
+    "named": true
+  },
+  {
+    "type": "signature_marker",
+    "named": true
+  },
+  {
+    "type": "tablet_equals_marker",
     "named": true
   },
   {
@@ -774,15 +1121,11 @@
     "named": false
   },
   {
+    "type": "title_marker",
+    "named": true
+  },
+  {
     "type": "v1",
-    "named": false
-  },
-  {
-    "type": "{",
-    "named": false
-  },
-  {
-    "type": "}",
     "named": false
   }
 ]
