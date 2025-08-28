@@ -76,3 +76,8 @@
 (response_marker) @punctuation.technique.quotes.response
 (response_separator) @punctuation.technique.response
 (response_value) @variant.technique.response
+
+; Attributes
+(attribute_joiner) @punctuation.technique.joiner
+(role_marker) @attribute.technique.role
+(role_name) @attribute.technique.role

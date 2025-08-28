@@ -18,6 +18,7 @@ module.exports = grammar({
                     prec(9, $.metadata),
                     prec(6, $.step),
                     prec(5, $.title),
+                    prec(4, $.attributes),
                     prec(4, $.responses),
                     prec(3, $.description),
                     prec(2, $._blank_line),
@@ -182,8 +183,17 @@ module.exports = grammar({
             ),
 
         // Role attributes only
-        attribute: ($) => prec(2, seq("@", $.role_name, "\n")),
+        attributes: ($) =>
+            seq(
+                optional(/[ \t]+/), // Allow leading whitespace
+                $.attribute,
+                repeat(seq($.attribute_joiner, $.attribute)),
+                "\n",
+            ),
 
+        attribute: ($) => seq($.role_marker, $.role_name),
+        attribute_joiner: ($) => "+",
+        role_marker: ($) => "@",
         role_name: ($) => $._identifier,
 
         // Response lines
