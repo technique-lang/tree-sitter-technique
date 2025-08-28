@@ -102,7 +102,7 @@ module.exports = grammar({
             choice(
                 $.inline_text,
                 $.inline_code,
-                // $.invocation,
+                $.invocation,
                 $.inline_binding,
             ),
 
@@ -113,7 +113,7 @@ module.exports = grammar({
         // word only would miss the token(prec()) branch so we wrap all of
         // this in a name that covers both.
         inline_text: ($) =>
-            choice($._identifier, token(prec(-1, /[^\s\n{~][^\n{~]*/))),
+            choice($._identifier, token(prec(-1, /[^\s\n{~<][^\n{~<]*/))),
 
         // inline code within descriptive text. We have to jump through some
         // additional hoops to relax and support multiline constructs
