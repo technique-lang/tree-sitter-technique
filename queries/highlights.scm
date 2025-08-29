@@ -33,6 +33,7 @@
 (title_text) @title.technique.title
 
 ; Step items - bright white
+(section_marker) @punctuation.list_marker.technique.step_item
 (step_marker) @punctuation.list_marker.technique.step_item
 
 ; Code blocks
@@ -83,3 +84,5 @@
 (attribute_joiner) @punctuation.technique.joiner
 (role_marker) @attribute.technique.role
 (role_name) @attribute.technique.role
+(place_marker) @attribute.technique.place
+(place_name) @attribute.technique.place

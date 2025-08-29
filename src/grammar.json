@@ -33,6 +33,14 @@
           },
           {
             "type": "PREC",
+            "value": 5,
+            "content": {
+              "type": "SYMBOL",
+              "name": "section"
+            }
+          },
+          {
+            "type": "PREC",
             "value": 4,
             "content": {
               "type": "SYMBOL",
@@ -546,7 +554,7 @@
       "type": "STRING",
       "value": "}"
     },
-    "_section_chunk": {
+    "section": {
       "type": "SEQ",
       "members": [
         {
@@ -556,16 +564,23 @@
         {
           "type": "SYMBOL",
           "name": "section_text"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
         }
       ]
     },
     "section_marker": {
       "type": "PATTERN",
-      "value": "[IVX]+ "
+      "value": "[IVX]+\\. "
     },
     "section_text": {
-      "type": "PATTERN",
-      "value": "[^\\n]*"
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_descriptive"
+      }
     },
     "step": {
       "type": "CHOICE",
@@ -743,6 +758,23 @@
       ]
     },
     "attribute": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "role"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "place"
+        }
+      ]
+    },
+    "attribute_joiner": {
+      "type": "STRING",
+      "value": "+"
+    },
+    "role": {
       "type": "SEQ",
       "members": [
         {
@@ -755,15 +787,32 @@
         }
       ]
     },
-    "attribute_joiner": {
-      "type": "STRING",
-      "value": "+"
-    },
     "role_marker": {
       "type": "STRING",
       "value": "@"
     },
     "role_name": {
+      "type": "SYMBOL",
+      "name": "_identifier"
+    },
+    "place": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "place_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "place_name"
+        }
+      ]
+    },
+    "place_marker": {
+      "type": "STRING",
+      "value": "^"
+    },
+    "place_name": {
       "type": "SYMBOL",
       "name": "_identifier"
     },
