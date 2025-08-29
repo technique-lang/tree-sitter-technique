@@ -181,7 +181,7 @@ module.exports = grammar({
                 seq($.code_start_marker, $._expression, $.code_end_marker),
             ),
 
-        // Role attributes only
+        // Attributes are roles or places
         attributes: ($) =>
             seq(
                 optional(/[ \t]+/), // Allow leading whitespace
@@ -190,10 +190,14 @@ module.exports = grammar({
                 "\n",
             ),
 
-        attribute: ($) => seq($.role_marker, $.role_name),
+        attribute: ($) => choice($.role, $.place),
         attribute_joiner: ($) => "+",
+        role: ($) => seq($.role_marker, $.role_name),
         role_marker: ($) => "@",
         role_name: ($) => $._identifier,
+        place: ($) => seq($.place_marker, $.place_name),
+        place_marker: ($) => "^",
+        place_name: ($) => $._identifier,
 
         // Response lines
         responses: ($) =>
