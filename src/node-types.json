@@ -71,15 +71,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "role_marker",
+          "type": "place",
           "named": true
         },
         {
-          "type": "role_name",
+          "type": "role",
           "named": true
         }
       ]
@@ -562,6 +562,30 @@
     "fields": {}
   },
   {
+    "type": "place",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "place_marker",
+          "named": true
+        },
+        {
+          "type": "place_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "place_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "procedure_name",
     "named": true,
     "fields": {}
@@ -669,9 +693,74 @@
     }
   },
   {
+    "type": "role",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "role_marker",
+          "named": true
+        },
+        {
+          "type": "role_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "role_name",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "section_marker",
+          "named": true
+        },
+        {
+          "type": "section_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "section_text",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "inline_binding",
+          "named": true
+        },
+        {
+          "type": "inline_code",
+          "named": true
+        },
+        {
+          "type": "inline_text",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "signature",
@@ -1000,6 +1089,10 @@
           "named": true
         },
         {
+          "type": "section",
+          "named": true
+        },
+        {
           "type": "step",
           "named": true
         },
@@ -1159,6 +1252,10 @@
     "named": true
   },
   {
+    "type": "place_marker",
+    "named": true
+  },
+  {
     "type": "repeat_keyword",
     "named": true
   },
@@ -1176,6 +1273,10 @@
   },
   {
     "type": "role_marker",
+    "named": true
+  },
+  {
+    "type": "section_marker",
     "named": true
   },
   {
