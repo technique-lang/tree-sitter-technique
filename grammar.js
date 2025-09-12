@@ -192,12 +192,22 @@ module.exports = grammar({
 
         attribute: ($) => choice($.role, $.place),
         attribute_joiner: ($) => "+",
-        role: ($) => seq($.role_marker, $.role_name),
+        role: ($) =>
+            choice(
+                seq($.role_marker, $.role_name),
+                seq($.role_marker, $.role_reset),
+            ),
         role_marker: ($) => "@",
+        role_reset: ($) => "*",
         role_name: ($) => $._identifier,
-        place: ($) => seq($.place_marker, $.place_name),
+        place: ($) =>
+            choice(
+                seq($.place_marker, $.place_name),
+                seq($.place_marker, $.place_reset),
+            ),
         place_marker: ($) => "^",
         place_name: ($) => $._identifier,
+        place_reset: ($) => "*",
 
         // Response lines
         responses: ($) =>
