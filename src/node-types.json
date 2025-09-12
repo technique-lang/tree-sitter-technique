@@ -576,12 +576,21 @@
         {
           "type": "place_name",
           "named": true
+        },
+        {
+          "type": "place_reset",
+          "named": true
         }
       ]
     }
   },
   {
     "type": "place_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "place_reset",
     "named": true,
     "fields": {}
   },
@@ -707,12 +716,21 @@
         {
           "type": "role_name",
           "named": true
+        },
+        {
+          "type": "role_reset",
+          "named": true
         }
       ]
     }
   },
   {
     "type": "role_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "role_reset",
     "named": true,
     "fields": {}
   },
@@ -1189,6 +1207,10 @@
   },
   {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
     "named": false
   },
   {

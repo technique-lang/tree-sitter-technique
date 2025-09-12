@@ -775,15 +775,33 @@
       "value": "+"
     },
     "role": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "role_marker"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "role_marker"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "role_name"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "role_name"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "role_marker"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "role_reset"
+            }
+          ]
         }
       ]
     },
@@ -791,20 +809,42 @@
       "type": "STRING",
       "value": "@"
     },
+    "role_reset": {
+      "type": "STRING",
+      "value": "*"
+    },
     "role_name": {
       "type": "SYMBOL",
       "name": "_identifier"
     },
     "place": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "place_marker"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "place_marker"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "place_name"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "place_name"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "place_marker"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "place_reset"
+            }
+          ]
         }
       ]
     },
@@ -815,6 +855,10 @@
     "place_name": {
       "type": "SYMBOL",
       "name": "_identifier"
+    },
+    "place_reset": {
+      "type": "STRING",
+      "value": "*"
     },
     "responses": {
       "type": "SEQ",
