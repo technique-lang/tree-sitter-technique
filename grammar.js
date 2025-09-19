@@ -91,7 +91,7 @@ module.exports = grammar({
         // Procedure title
         title: ($) => seq($.title_marker, $.title_text, "\n"),
         title_marker: ($) => "#",
-        title_text: ($) => repeat1($._descriptive),
+        title_text: ($) => token(prec(-1, /[^\n]*/)),
 
         // Description - any line with descriptive content
 

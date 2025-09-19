@@ -1146,33 +1146,6 @@
     }
   },
   {
-    "type": "title_text",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "inline_binding",
-          "named": true
-        },
-        {
-          "type": "inline_code",
-          "named": true
-        },
-        {
-          "type": "inline_text",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "variable",
     "named": true,
     "fields": {}
@@ -1315,6 +1288,10 @@
   },
   {
     "type": "title_marker",
+    "named": true
+  },
+  {
+    "type": "title_text",
     "named": true
   },
   {

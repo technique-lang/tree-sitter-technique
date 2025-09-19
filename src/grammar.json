@@ -408,10 +408,14 @@
       "value": "#"
     },
     "title_text": {
-      "type": "REPEAT1",
+      "type": "TOKEN",
       "content": {
-        "type": "SYMBOL",
-        "name": "_descriptive"
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\n]*"
+        }
       }
     },
     "description": {
