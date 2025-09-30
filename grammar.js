@@ -7,27 +7,34 @@ module.exports = grammar({
     extras: ($) => [/[ \t]/],
 
     rules: {
+        document: ($) => seq(repeat($.metadata), optional($.technique)),
+
         // a Technique is either standalone Scopes (nested steps) or a series
         // of Procedures (which can contain nested steps). But for syntax
         // highlighting purposes we don't care about that structural
         // ambiguity. We're just going to detect lines.
 
         technique: ($) =>
-            repeat1(
-                choice(
-                    prec(9, $.metadata),
-                    prec(6, $.step),
-                    prec(5, $.title),
-                    prec(5, $.section),
-                    prec(4, $.attributes),
-                    prec(4, $.responses),
-                    prec(2, $.declaration),
-                    prec(1, $.description),
-                    prec(0, $._blank_line),
+            repeat1(choice($.procedure, $._element, token(prec(-10, /\n/)))),
+
+        procedure: ($) =>
+            prec(
+                10,
+                seq(
+                    $.declaration,
+                    optional(/\n/), // Allow blank line between declaration and title
+                    optional($.title),
                 ),
             ),
 
-        _blank_line: ($) => "\n",
+        _element: ($) =>
+            choice(
+                $.step,
+                $.section,
+                $.attributes,
+                $.responses,
+                $.description,
+            ),
 
         // Metadata block of headers
         metadata: ($) => choice($.magic_line, $.spdx_line, $.template_line),
@@ -94,7 +101,6 @@ module.exports = grammar({
         title_text: ($) => token(prec(-1, /[^\n]*/)),
 
         // Description - any line with descriptive content
-
         description: ($) => seq(repeat1($._descriptive), "\n"),
 
         _descriptive: ($) =>
