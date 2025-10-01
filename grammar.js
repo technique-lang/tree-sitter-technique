@@ -6,34 +6,49 @@ module.exports = grammar({
 
     extras: ($) => [/[ \t]/],
 
+    externals: ($) => [$._boundary],
+
     rules: {
         document: ($) => seq(repeat($.metadata), optional($.technique)),
 
         // a Technique is either standalone Scopes (nested steps) or a series
-        // of Procedures (which can contain nested steps). But for syntax
-        // highlighting purposes we don't care about that structural
-        // ambiguity. We're just going to detect lines.
+        // of Procedures (which can contain nested steps)
 
-        technique: ($) =>
-            repeat1(choice($.procedure, $._element, token(prec(-10, /\n/)))),
+        technique: ($) => repeat1(choice($.procedure, $._element, /\n/)),
 
+        // We make procedure right-associative so that's its greedy when
+        // detecting a procedure boundary. Note that we have the external
+        // scanner detect the beginning of each procedure and returning the
+        // zero-width _boundary token.
         procedure: ($) =>
-            prec(
-                10,
+            prec.right(
                 seq(
+                    $._boundary,
                     $.declaration,
-                    optional(/\n/), // Allow blank line between declaration and title
-                    optional($.title),
+                    repeat(
+                        choice(
+                            $.title,
+                            $.description,
+                            $.step,
+                            $.section,
+                            $.attributes,
+                            $.responses,
+                            /\n/, // Allow blank lines
+                        ),
+                    ),
                 ),
             ),
 
         _element: ($) =>
-            choice(
-                $.step,
-                $.section,
-                $.attributes,
-                $.responses,
-                $.description,
+            prec(
+                -1, // Lower precedence than procedures
+                choice(
+                    $.step,
+                    $.section,
+                    $.attributes,
+                    $.responses,
+                    $.description,
+                ),
             ),
 
         // Metadata block of headers
