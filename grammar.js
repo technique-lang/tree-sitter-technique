@@ -6,28 +6,46 @@ module.exports = grammar({
 
     extras: ($) => [/[ \t]/],
 
-    rules: {
-        // a Technique is either standalone Scopes (nested steps) or a series
-        // of Procedures (which can contain nested steps). But for syntax
-        // highlighting purposes we don't care about that structural
-        // ambiguity. We're just going to detect lines.
+    externals: ($) => [$._boundary],
 
-        technique: ($) =>
-            repeat1(
-                choice(
-                    prec(9, $.metadata),
-                    prec(6, $.step),
-                    prec(5, $.title),
-                    prec(5, $.section),
-                    prec(4, $.attributes),
-                    prec(4, $.responses),
-                    prec(2, $.declaration),
-                    prec(1, $.description),
-                    prec(0, $._blank_line),
+    rules: {
+        document: ($) => seq(repeat($.metadata), optional($.technique)),
+
+        // a Technique is either standalone Scopes (nested steps) or a series
+        // of Procedures which contain Scopes (nested steps etc).
+        technique: ($) => repeat1(choice($.procedure, $._element, /\n/)),
+
+        // We make procedure right-associative so that's its greedy when
+        // detecting a procedure boundary. Note that we have the external
+        // scanner detect the beginning of each procedure and returning the
+        // zero-width _boundary token.
+        procedure: ($) =>
+            prec.right(
+                seq(
+                    $._boundary,
+                    $.declaration,
+                    repeat(
+                        choice(
+                            $.title,
+                            $.description,
+                            $.step,
+                            $.section,
+                            $.attributes,
+                            $.responses,
+                            /\n/, // Allow blank lines
+                        ),
+                    ),
                 ),
             ),
 
-        _blank_line: ($) => "\n",
+        _element: ($) =>
+            choice(
+                $.step,
+                $.section,
+                $.attributes,
+                $.responses,
+                $.description,
+            ),
 
         // Metadata block of headers
         metadata: ($) => choice($.magic_line, $.spdx_line, $.template_line),
@@ -94,7 +112,6 @@ module.exports = grammar({
         title_text: ($) => token(prec(-1, /[^\n]*/)),
 
         // Description - any line with descriptive content
-
         description: ($) => seq(repeat1($._descriptive), "\n"),
 
         _descriptive: ($) =>

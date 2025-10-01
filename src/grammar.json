@@ -2,89 +2,127 @@
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "technique",
   "rules": {
+    "document": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "metadata"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "technique"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "technique": {
       "type": "REPEAT1",
       "content": {
         "type": "CHOICE",
         "members": [
           {
-            "type": "PREC",
-            "value": 9,
-            "content": {
-              "type": "SYMBOL",
-              "name": "metadata"
-            }
+            "type": "SYMBOL",
+            "name": "procedure"
           },
           {
-            "type": "PREC",
-            "value": 6,
-            "content": {
-              "type": "SYMBOL",
-              "name": "step"
-            }
+            "type": "SYMBOL",
+            "name": "_element"
           },
           {
-            "type": "PREC",
-            "value": 5,
-            "content": {
-              "type": "SYMBOL",
-              "name": "title"
-            }
+            "type": "PATTERN",
+            "value": "\\n"
+          }
+        ]
+      }
+    },
+    "procedure": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_boundary"
           },
           {
-            "type": "PREC",
-            "value": 5,
-            "content": {
-              "type": "SYMBOL",
-              "name": "section"
-            }
+            "type": "SYMBOL",
+            "name": "declaration"
           },
           {
-            "type": "PREC",
-            "value": 4,
+            "type": "REPEAT",
             "content": {
-              "type": "SYMBOL",
-              "name": "attributes"
-            }
-          },
-          {
-            "type": "PREC",
-            "value": 4,
-            "content": {
-              "type": "SYMBOL",
-              "name": "responses"
-            }
-          },
-          {
-            "type": "PREC",
-            "value": 2,
-            "content": {
-              "type": "SYMBOL",
-              "name": "declaration"
-            }
-          },
-          {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "SYMBOL",
-              "name": "description"
-            }
-          },
-          {
-            "type": "PREC",
-            "value": 0,
-            "content": {
-              "type": "SYMBOL",
-              "name": "_blank_line"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "title"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "description"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "step"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "section"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "attributes"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "responses"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\n"
+                }
+              ]
             }
           }
         ]
       }
     },
-    "_blank_line": {
-      "type": "STRING",
-      "value": "\n"
+    "_element": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "step"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attributes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "responses"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "description"
+        }
+      ]
     },
     "metadata": {
       "type": "CHOICE",
@@ -1611,7 +1649,12 @@
   ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_boundary"
+    }
+  ],
   "inline": [],
   "supertypes": [],
   "reserved": {}
