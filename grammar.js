@@ -12,8 +12,7 @@ module.exports = grammar({
         document: ($) => seq(repeat($.metadata), optional($.technique)),
 
         // a Technique is either standalone Scopes (nested steps) or a series
-        // of Procedures (which can contain nested steps)
-
+        // of Procedures which contain Scopes (nested steps etc).
         technique: ($) => repeat1(choice($.procedure, $._element, /\n/)),
 
         // We make procedure right-associative so that's its greedy when
@@ -40,15 +39,12 @@ module.exports = grammar({
             ),
 
         _element: ($) =>
-            prec(
-                -1, // Lower precedence than procedures
-                choice(
-                    $.step,
-                    $.section,
-                    $.attributes,
-                    $.responses,
-                    $.description,
-                ),
+            choice(
+                $.step,
+                $.section,
+                $.attributes,
+                $.responses,
+                $.description,
             ),
 
         // Metadata block of headers
