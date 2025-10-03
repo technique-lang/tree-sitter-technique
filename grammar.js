@@ -107,9 +107,9 @@ module.exports = grammar({
         forma: ($) => choice(/[A-Z][a-zA-Z0-9]*/, "()"),
 
         // Procedure title
-        title: ($) => seq($.title_marker, $.title_text, "\n"),
+        title: ($) => seq($.title_marker, optional(/[ \t]+/), optional($.title_text), "\n"),
         title_marker: ($) => "#",
-        title_text: ($) => token(prec(-1, /[^\n]*/)),
+        title_text: ($) => token(prec(-1, /[^\n]+/)),
 
         // Description - any line with descriptive content
         description: ($) => seq(repeat1($._descriptive), "\n"),
@@ -155,7 +155,7 @@ module.exports = grammar({
         // Sections are step-like lines beginning with capital roman numerals.
         section: ($) => seq($.section_marker, $.section_text, "\n"),
 
-        section_marker: ($) => /[IVX]+\. /,
+        section_marker: ($) => token(seq(/[IVX]+\./, " ")),
         section_text: ($) => repeat1($._descriptive),
 
         // Because of the limitations of Tree Sitter and its inability to do
@@ -186,11 +186,11 @@ module.exports = grammar({
                 $._dependent_subsubstep_marker,
                 $._parallel_step_marker,
             ),
-        // Step markers as separate named nodes
-        _dependent_step_marker: ($) => /\d+\.\s/, // 1. 2. 3. etc.
-        _dependent_substep_marker: ($) => /[a-hj-km-uwyz]\.\s/, // a. b. c.
-        _dependent_subsubstep_marker: ($) => /[ivxl]+\.\s/, // i. ii. iii. iv. etc.
-        _parallel_step_marker: ($) => /\-\s/,
+        // Step markers as separate named nodes - must include space for detection
+        _dependent_step_marker: ($) => token(seq(/\d+\./, " ")), // 1. 2. 3. etc.
+        _dependent_substep_marker: ($) => token(seq(/[a-hj-km-uwyz]\./, " ")), // a. b. c.
+        _dependent_subsubstep_marker: ($) => token(seq(/[ivxl]+\./, " ")), // i. ii. iii. iv. etc.
+        _parallel_step_marker: ($) => token(seq(/\-/, " ")),
 
         code_block: ($) =>
             prec(
@@ -240,7 +240,7 @@ module.exports = grammar({
                 $.response_marker,
                 $.response_value,
                 $.response_marker,
-                optional($.response_condition),
+                optional(seq(optional(/[ \t]+/), $.response_condition, optional(/[ \t]+/))),
             ),
 
         response_condition: ($) => $._condition,
