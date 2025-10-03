@@ -107,9 +107,9 @@ module.exports = grammar({
         forma: ($) => choice(/[A-Z][a-zA-Z0-9]*/, "()"),
 
         // Procedure title
-        title: ($) => seq($.title_marker, $.title_text, "\n"),
+        title: ($) => seq($.title_marker, optional(/[ \t]+/), optional($.title_text), "\n"),
         title_marker: ($) => "#",
-        title_text: ($) => token(prec(-1, /[^\n]*/)),
+        title_text: ($) => token(prec(-1, /[^\n]+/)),
 
         // Description - any line with descriptive content
         description: ($) => seq(repeat1($._descriptive), "\n"),

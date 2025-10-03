@@ -22,6 +22,7 @@ The sequence of commands to iterate on this grammar is:
 
 ```bash
 $ tree-sitter generate
+$ tree-sitter build
 $ tree-sitter parse Example.tq
 $ tree-sitter highlight Example.tq
 ```
