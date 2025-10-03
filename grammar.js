@@ -240,7 +240,7 @@ module.exports = grammar({
                 $.response_marker,
                 $.response_value,
                 $.response_marker,
-                optional($.response_condition),
+                optional(seq(optional(/[ \t]+/), $.response_condition, optional(/[ \t]+/))),
             ),
 
         response_condition: ($) => $._condition,
