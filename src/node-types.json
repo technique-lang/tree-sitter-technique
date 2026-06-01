@@ -28,6 +28,10 @@
           "named": true
         },
         {
+          "type": "list_structure",
+          "named": true
+        },
+        {
           "type": "multiline_literal",
           "named": true
         },
@@ -53,10 +57,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "tablet",
           "named": true
         },
         {
@@ -133,6 +133,10 @@
           "named": true
         },
         {
+          "type": "list_structure",
+          "named": true
+        },
+        {
           "type": "multiline_literal",
           "named": true
         },
@@ -158,10 +162,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "tablet",
           "named": true
         },
         {
@@ -290,6 +290,10 @@
           "named": true
         },
         {
+          "type": "list_structure",
+          "named": true
+        },
+        {
           "type": "multiline_literal",
           "named": true
         },
@@ -315,10 +319,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "tablet",
           "named": true
         },
         {
@@ -417,6 +417,10 @@
           "named": true
         },
         {
+          "type": "list_structure",
+          "named": true
+        },
+        {
           "type": "multiline_literal",
           "named": true
         },
@@ -430,10 +434,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "tablet",
           "named": true
         },
         {
@@ -501,6 +501,25 @@
     "fields": {}
   },
   {
+    "type": "label",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label_marker",
+          "named": true
+        },
+        {
+          "type": "label_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "label_marker",
     "named": true,
     "fields": {}
@@ -509,6 +528,79 @@
     "type": "label_text",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "list_end_marker",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "list_start_marker",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "list_structure",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "list_end_marker",
+          "named": true
+        },
+        {
+          "type": "list_start_marker",
+          "named": true
+        },
+        {
+          "type": "list_structure",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "pair",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "magic_line",
@@ -565,6 +657,65 @@
     "type": "numeric_literal",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "pair",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "list_structure",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "pair_equals_marker",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "parameters_end_marker",
@@ -683,6 +834,10 @@
           "named": true
         },
         {
+          "type": "list_structure",
+          "named": true
+        },
+        {
           "type": "multiline_literal",
           "named": true
         },
@@ -700,10 +855,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "tablet",
           "named": true
         },
         {
@@ -981,6 +1132,10 @@
           "named": true
         },
         {
+          "type": "list_structure",
+          "named": true
+        },
+        {
           "type": "multiline_literal",
           "named": true
         },
@@ -1005,10 +1160,6 @@
           "named": true
         },
         {
-          "type": "tablet",
-          "named": true
-        },
-        {
           "type": "variable",
           "named": true
         }
@@ -1022,117 +1173,6 @@
   },
   {
     "type": "string_text",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "tablet",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "tablet_end_marker",
-          "named": true
-        },
-        {
-          "type": "tablet_pair",
-          "named": true
-        },
-        {
-          "type": "tablet_start_marker",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tablet_end_marker",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "tablet_label",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "label_marker",
-          "named": true
-        },
-        {
-          "type": "label_text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tablet_pair",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "application",
-          "named": true
-        },
-        {
-          "type": "binding_expression",
-          "named": true
-        },
-        {
-          "type": "foreach_expression",
-          "named": true
-        },
-        {
-          "type": "invocation",
-          "named": true
-        },
-        {
-          "type": "multiline_literal",
-          "named": true
-        },
-        {
-          "type": "numeric_literal",
-          "named": true
-        },
-        {
-          "type": "repeat_expression",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "tablet",
-          "named": true
-        },
-        {
-          "type": "tablet_equals_marker",
-          "named": true
-        },
-        {
-          "type": "tablet_label",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tablet_start_marker",
     "named": true,
     "fields": {}
   },
@@ -1297,6 +1337,10 @@
     "named": true
   },
   {
+    "type": "pair_equals_marker",
+    "named": true
+  },
+  {
     "type": "place_marker",
     "named": true
   },
@@ -1326,10 +1370,6 @@
   },
   {
     "type": "signature_marker",
-    "named": true
-  },
-  {
-    "type": "tablet_equals_marker",
     "named": true
   },
   {
