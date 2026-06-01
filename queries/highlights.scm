@@ -69,9 +69,9 @@
 (foreach_keyword) @keyword.technique.foreach
 (in_keyword) @keyword.technique.in
 
-; Tablets
-(tablet_start_marker) @punctuation.technique.tablet
-(tablet_end_marker) @punctuation.technique.tablet
+; Lists and tablets
+(list_start_marker) @punctuation.technique.tablet
+(list_end_marker) @punctuation.technique.tablet
 (label_marker) @punctuation.technique.quotes.tablet
 (label_text) @label.technique.label
 

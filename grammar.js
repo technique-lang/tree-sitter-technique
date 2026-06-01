@@ -8,6 +8,9 @@ module.exports = grammar({
 
     externals: ($) => [$._boundary],
 
+    // A text beginning with `"` could be a label or a string literal
+    conflicts: ($) => [[$.label_marker, $.string_marker]],
+
     rules: {
         document: ($) => seq(repeat($.metadata), optional($.technique)),
 
@@ -270,7 +273,7 @@ module.exports = grammar({
                 $.numeric_literal,
                 $.multiline_literal,
                 $.binding_expression,
-                $.tablet,
+                $.list_structure,
             ),
 
         variable: ($) => $._identifier,
@@ -404,27 +407,30 @@ module.exports = grammar({
         repeat_expression: ($) =>
             prec(2, seq($.repeat_keyword, $._expression)),
 
-        // Tablet - key-value pairs in brackets
-        tablet: ($) =>
+        list_structure: ($) =>
             seq(
-                $.tablet_start_marker,
-                optional(/\n+/), // Allow newlines after opening bracket
+                $.list_start_marker,
+                optional($._list_separator), // newlines/commas after opening bracket
                 optional(
-                    seq($.tablet_pair, repeat(seq(/\n+/, $.tablet_pair))),
+                    seq(
+                        $._list_element,
+                        repeat(seq($._list_separator, $._list_element)),
+                    ),
                 ),
-                optional(/\n+/), // Allow newlines before closing bracket
-                $.tablet_end_marker,
+                optional($._list_separator), // newlines/commas before closing bracket
+                $.list_end_marker,
             ),
 
-        tablet_pair: ($) =>
-            seq($.tablet_label, $.tablet_equals_marker, $._expression),
-        tablet_label: ($) =>
-            seq($.label_marker, $.label_text, $.label_marker),
+        _list_separator: ($) => /[,\n][ \t,\n]*/,
+        _list_element: ($) => choice($.pair, $._expression),
+
+        pair: ($) => seq($.label, $.pair_equals_marker, $._expression),
+        label: ($) => seq($.label_marker, $.label_text, $.label_marker),
         label_marker: ($) => '"',
         label_text: ($) => $._string,
-        tablet_start_marker: ($) => "[",
-        tablet_equals_marker: ($) => "=",
-        tablet_end_marker: ($) => "]",
+        list_start_marker: ($) => "[",
+        pair_equals_marker: ($) => "=",
+        list_end_marker: ($) => "]",
 
         // Keywords in code
         repeat_keyword: ($) => "repeat",
