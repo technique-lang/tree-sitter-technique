@@ -321,6 +321,10 @@
         {
           "type": "SYMBOL",
           "name": "_naked_genus"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "wildcard"
         }
       ]
     },
@@ -423,6 +427,10 @@
           "value": "()"
         }
       ]
+    },
+    "wildcard": {
+      "type": "STRING",
+      "value": "*"
     },
     "title": {
       "type": "SEQ",
@@ -1171,8 +1179,21 @@
       ]
     },
     "variable": {
-      "type": "SYMBOL",
-      "name": "_identifier"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hole"
+        }
+      ]
+    },
+    "hole": {
+      "type": "STRING",
+      "value": "?"
     },
     "string_literal": {
       "type": "SEQ",
