@@ -19,12 +19,14 @@
 
 ; Forma are the names of types - brown #8f5902
 (forma) @type.technique.forma
+(wildcard) @type.technique.forma
 
 (parameters_start_marker) @punctuation.technique.parameters
 (parameters_end_marker) @punctuation.technique.parameters
 (parameters_separator) @punctuation.technique.parameters
 
 (variable) @variable.technique.identifier
+(hole) @variable.hole
 
 (binding_marker) @punctuation.technique.binding
 
