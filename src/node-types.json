@@ -349,6 +349,10 @@
         {
           "type": "forma",
           "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
         }
       ]
     }
@@ -1238,6 +1242,21 @@
   {
     "type": "variable",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "hole",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "wildcard",
+    "named": true,
     "fields": {}
   },
   {
@@ -1310,6 +1329,10 @@
   },
   {
     "type": "foreach_keyword",
+    "named": true
+  },
+  {
+    "type": "hole",
     "named": true
   },
   {

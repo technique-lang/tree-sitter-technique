@@ -96,6 +96,7 @@ module.exports = grammar({
                 $._list_genus,
                 $._tuple_genus,
                 $._naked_genus,
+                $.wildcard,
             ),
 
         _simple_genus: ($) => $.forma,
@@ -108,6 +109,9 @@ module.exports = grammar({
 
         // Forma, the basic type
         forma: ($) => choice(/[A-Z][a-zA-Z0-9]*/, "()"),
+
+        // Wildcard genus, an "any type" placeholder in a signature
+        wildcard: ($) => "*",
 
         // Procedure title
         title: ($) => seq($.title_marker, optional(/[ \t]+/), optional($.title_text), "\n"),
@@ -276,7 +280,10 @@ module.exports = grammar({
                 $.list_structure,
             ),
 
-        variable: ($) => $._identifier,
+        variable: ($) => choice($._identifier, $.hole),
+
+        // A hole is a placeholder for a value not yet supplied
+        hole: ($) => "?",
 
         // Strings with interpolation
         string_literal: ($) =>

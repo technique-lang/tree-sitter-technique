@@ -119,6 +119,10 @@
       "bold": true,
       "color": "#729fcf"
     },
+    "variable.hole": {
+      "color": "#f57900",
+      "bold": true
+    },
     "variable.parameter": {
       "color": "#729fcf",
       "bold": true
