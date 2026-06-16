@@ -247,12 +247,12 @@ module.exports = grammar({
                 $.response_marker,
                 $.response_value,
                 $.response_marker,
-                optional(seq(optional(/[ \t]+/), $.response_condition, optional(/[ \t]+/))),
+                optional($.response_condition),
             ),
 
         response_condition: ($) => $._condition,
 
-        _condition: ($) => token(prec(-1, /[^|\n]+/)), // Condition text, stop at | or newline
+        _condition: ($) => token(prec(-1, /[^ \t|\n][^|\n]*/)), // Condition text, stop at | or newline
 
         response_separator: ($) => "|",
         response_marker: ($) => "'",
