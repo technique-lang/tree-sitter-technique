@@ -114,9 +114,9 @@ module.exports = grammar({
         wildcard: ($) => "*",
 
         // Procedure title
-        title: ($) => seq($.title_marker, optional(/[ \t]+/), optional($.title_text), "\n"),
+        title: ($) => seq($.title_marker, optional($.title_text), "\n"),
         title_marker: ($) => "#",
-        title_text: ($) => token(prec(-1, /[^\n]+/)),
+        title_text: ($) => token(prec(-1, /[^ \t\n]([^\n]*[^ \t\n])?/)),
 
         // Description - any line with descriptive content
         description: ($) => seq(repeat1($._descriptive), "\n"),
@@ -252,7 +252,7 @@ module.exports = grammar({
 
         response_condition: ($) => $._condition,
 
-        _condition: ($) => token(prec(-1, /[^ \t|\n][^|\n]*/)), // Condition text, stop at | or newline
+        _condition: ($) => token(prec(-1, /[^ \t|\n]([^|\n]*[^ \t|\n])?/)), // Condition text, stop at | or newline
 
         response_separator: ($) => "|",
         response_marker: ($) => "'",
