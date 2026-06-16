@@ -114,9 +114,9 @@ module.exports = grammar({
         wildcard: ($) => "*",
 
         // Procedure title
-        title: ($) => seq($.title_marker, optional(/[ \t]+/), optional($.title_text), "\n"),
+        title: ($) => seq($.title_marker, optional($.title_text), "\n"),
         title_marker: ($) => "#",
-        title_text: ($) => token(prec(-1, /[^\n]+/)),
+        title_text: ($) => token(prec(-1, /[^ \t\n]([^\n]*[^ \t\n])?/)),
 
         // Description - any line with descriptive content
         description: ($) => seq(repeat1($._descriptive), "\n"),
@@ -247,12 +247,12 @@ module.exports = grammar({
                 $.response_marker,
                 $.response_value,
                 $.response_marker,
-                optional(seq(optional(/[ \t]+/), $.response_condition, optional(/[ \t]+/))),
+                optional($.response_condition),
             ),
 
         response_condition: ($) => $._condition,
 
-        _condition: ($) => token(prec(-1, /[^|\n]+/)), // Condition text, stop at | or newline
+        _condition: ($) => token(prec(-1, /[^ \t|\n]([^|\n]*[^ \t|\n])?/)), // Condition text, stop at | or newline
 
         response_separator: ($) => "|",
         response_marker: ($) => "'",
@@ -307,7 +307,7 @@ module.exports = grammar({
 
         numeric_literal: ($) =>
             choice(
-                /-?\d+(\.\d+)?\s*((±|\+\/-)\s*\d+(\.\d+)?)?\s*((×|x|\*)\s*10((\^\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)))?\s+[a-zA-Z\/°]+/,
+                /-?\d+(\.\d+)?[ \t]*((±|\+\/-)[ \t]*\d+(\.\d+)?)?[ \t]*((×|x|\*)[ \t]*10((\^\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)))?[ \t]+[a-zA-Z\/°]+/,
                 /-?\d+(\.\d+)?/,
             ),
 

@@ -443,18 +443,6 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "PATTERN",
-              "value": "[ \\t]+"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
               "type": "SYMBOL",
               "name": "title_text"
             },
@@ -480,7 +468,7 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^\\n]+"
+          "value": "[^ \\t\\n]([^\\n]*[^ \\t\\n])?"
         }
       }
     },
@@ -1050,37 +1038,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "PATTERN",
-                      "value": "[ \\t]+"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "response_condition"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "PATTERN",
-                      "value": "[ \\t]+"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "response_condition"
             },
             {
               "type": "BLANK"
@@ -1100,7 +1059,7 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^|\\n]+"
+          "value": "[^ \\t|\\n]([^|\\n]*[^ \\t|\\n])?"
         }
       }
     },
@@ -1273,7 +1232,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "-?\\d+(\\.\\d+)?\\s*((±|\\+\\/-)\\s*\\d+(\\.\\d+)?)?\\s*((×|x|\\*)\\s*10((\\^\\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)))?\\s+[a-zA-Z\\/°]+"
+          "value": "-?\\d+(\\.\\d+)?[ \\t]*((±|\\+\\/-)[ \\t]*\\d+(\\.\\d+)?)?[ \\t]*((×|x|\\*)[ \\t]*10((\\^\\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)))?[ \\t]+[a-zA-Z\\/°]+"
         },
         {
           "type": "PATTERN",
