@@ -351,7 +351,7 @@ module.exports = grammar({
         invocation_target: ($) =>
             choice(
                 $._identifier, // local procedure
-                /https?:\/\/[^\s>]+/, // remote URL
+                /(https|http|file):[a-zA-Z0-9.,?&#%=:/_-]+/, // external URL
             ),
         invocation_start_marker: ($) => "<",
         invocation_end_marker: ($) => ">",
