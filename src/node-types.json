@@ -56,6 +56,10 @@
           "named": true
         },
         {
+          "type": "response_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         },
@@ -162,6 +166,10 @@
         },
         {
           "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
           "named": true
         },
         {
@@ -326,6 +334,10 @@
           "named": true
         },
         {
+          "type": "response_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         },
@@ -446,6 +458,10 @@
         },
         {
           "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
           "named": true
         },
         {
@@ -612,6 +628,10 @@
           "named": true
         },
         {
+          "type": "response_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         },
@@ -728,6 +748,10 @@
         },
         {
           "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
           "named": true
         },
         {
@@ -882,6 +906,10 @@
           "named": true
         },
         {
+          "type": "response_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         },
@@ -923,6 +951,25 @@
     "type": "response_condition",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "response_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "response_marker",
+          "named": true
+        },
+        {
+          "type": "response_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "responses",
@@ -1177,6 +1224,10 @@
         },
         {
           "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
           "named": true
         },
         {

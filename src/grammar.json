@@ -1125,6 +1125,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "response_literal"
+        },
+        {
+          "type": "SYMBOL",
           "name": "numeric_literal"
         },
         {
@@ -1198,6 +1202,23 @@
     "string_text": {
       "type": "SYMBOL",
       "name": "_string"
+    },
+    "response_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "response_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "response_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "response_marker"
+        }
+      ]
     },
     "_string": {
       "type": "TOKEN",

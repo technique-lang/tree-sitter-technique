@@ -275,6 +275,7 @@ module.exports = grammar({
                 $.invocation,
                 $.application,
                 $.string_literal,
+                $.response_literal,
                 $.numeric_literal,
                 $.multiline_literal,
                 $.binding_expression,
@@ -298,6 +299,9 @@ module.exports = grammar({
             ),
         string_marker: ($) => '"',
         string_text: ($) => $._string,
+
+        response_literal: ($) =>
+            seq($.response_marker, $.response_value, $.response_marker),
 
         _string: ($) => token(prec(-1, /[^"{}]+/)),
 
