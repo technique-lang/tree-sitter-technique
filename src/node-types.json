@@ -60,6 +60,10 @@
           "named": true
         },
         {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -162,6 +166,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
           "named": true
         },
         {
@@ -322,6 +330,10 @@
           "named": true
         },
         {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -438,6 +450,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
           "named": true
         },
         {
@@ -600,6 +616,10 @@
           "named": true
         },
         {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -712,6 +732,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
           "named": true
         },
         {
@@ -859,6 +883,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
           "named": true
         },
         {
@@ -1164,6 +1192,10 @@
           "named": true
         },
         {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -1238,6 +1270,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "unit_literal",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "variable",

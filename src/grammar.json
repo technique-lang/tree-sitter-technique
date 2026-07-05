@@ -1101,6 +1101,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unit_literal"
+        },
+        {
+          "type": "SYMBOL",
           "name": "repeat_expression"
         },
         {
@@ -1153,6 +1157,10 @@
     "hole": {
       "type": "STRING",
       "value": "?"
+    },
+    "unit_literal": {
+      "type": "STRING",
+      "value": "()"
     },
     "string_literal": {
       "type": "SEQ",
