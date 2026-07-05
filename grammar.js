@@ -269,6 +269,7 @@ module.exports = grammar({
         _expression: ($) =>
             choice(
                 $.variable,
+                $.unit_literal,
                 $.repeat_expression,
                 $.foreach_expression,
                 $.invocation,
@@ -284,6 +285,9 @@ module.exports = grammar({
 
         // A hole is a placeholder for a value not yet supplied
         hole: ($) => "?",
+
+        // A unit literal is the empty value
+        unit_literal: ($) => "()",
 
         // Strings with interpolation
         string_literal: ($) =>

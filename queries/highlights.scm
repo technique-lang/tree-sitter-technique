@@ -27,6 +27,7 @@
 
 (variable) @variable.technique.identifier
 (hole) @variable.hole
+(unit_literal) @variable.unit
 
 (binding_marker) @punctuation.technique.binding
 
