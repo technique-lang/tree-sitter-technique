@@ -123,6 +123,10 @@
       "color": "#f57900",
       "bold": true
     },
+    "variable.unit": {
+      "color": "#f57900",
+      "bold": true
+    },
     "variable.parameter": {
       "color": "#729fcf",
       "bold": true
