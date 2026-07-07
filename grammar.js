@@ -448,10 +448,8 @@ module.exports = grammar({
         pair_equals_marker: ($) => "=",
         list_end_marker: ($) => "]",
 
-        // A tuple combines two or more values of possibly differing types,
-        // e.g. `(2, "mice")`. Unlike a list, always parenthesised and
-        // comma-separated, and never just one element (that's `unit_literal`
-        // `()`, or the bare value itself).
+        // Two or more comma-separated values, e.g. `(2, "mice")`. A single
+        // element isn't a tuple — that's `unit_literal` `()`, or the value.
         tuple_literal: ($) =>
             seq(
                 $.tuple_start_marker,
