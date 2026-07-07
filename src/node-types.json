@@ -64,6 +64,10 @@
           "named": true
         },
         {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
           "type": "unit_literal",
           "named": true
         },
@@ -174,6 +178,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
           "named": true
         },
         {
@@ -342,6 +350,10 @@
           "named": true
         },
         {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
           "type": "unit_literal",
           "named": true
         },
@@ -469,6 +481,10 @@
           "named": true
         },
         {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
           "type": "unit_literal",
           "named": true
         },
@@ -493,6 +509,22 @@
       "required": true,
       "types": [
         {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
           "type": "invocation_end_marker",
           "named": true
         },
@@ -502,6 +534,14 @@
         },
         {
           "type": "invocation_target",
+          "named": true
+        },
+        {
+          "type": "list_structure",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
           "named": true
         },
         {
@@ -521,7 +561,23 @@
           "named": true
         },
         {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
           "named": true
         },
         {
@@ -633,6 +689,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
           "named": true
         },
         {
@@ -756,6 +816,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
           "named": true
         },
         {
@@ -911,6 +975,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
           "named": true
         },
         {
@@ -1243,6 +1311,10 @@
           "named": true
         },
         {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
           "type": "unit_literal",
           "named": true
         },
@@ -1321,6 +1393,96 @@
         }
       ]
     }
+  },
+  {
+    "type": "tuple_end_marker",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tuple_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "list_structure",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_end_marker",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_separator",
+          "named": true
+        },
+        {
+          "type": "tuple_start_marker",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple_separator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "tuple_start_marker",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "unit_literal",

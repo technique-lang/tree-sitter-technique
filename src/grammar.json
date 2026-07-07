@@ -1142,6 +1142,10 @@
         {
           "type": "SYMBOL",
           "name": "list_structure"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tuple_literal"
         }
       ]
     },
@@ -1357,28 +1361,37 @@
                     "name": "parameters_start_marker"
                   },
                   {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "variable"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "string_literal"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "numeric_literal"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "parameters_separator"
-                        }
-                      ]
-                    }
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "_expression"
+                          },
+                          {
+                            "type": "REPEAT",
+                            "content": {
+                              "type": "SEQ",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "parameters_separator"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "_expression"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
                   },
                   {
                     "type": "SYMBOL",
@@ -1762,6 +1775,51 @@
     "list_end_marker": {
       "type": "STRING",
       "value": "]"
+    },
+    "tuple_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "tuple_start_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "tuple_separator"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tuple_end_marker"
+        }
+      ]
+    },
+    "tuple_start_marker": {
+      "type": "STRING",
+      "value": "("
+    },
+    "tuple_separator": {
+      "type": "STRING",
+      "value": ","
+    },
+    "tuple_end_marker": {
+      "type": "STRING",
+      "value": ")"
     },
     "repeat_keyword": {
       "type": "STRING",
