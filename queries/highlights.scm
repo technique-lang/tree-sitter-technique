@@ -78,6 +78,11 @@
 (label_marker) @punctuation.technique.quotes.tablet
 (label_text) @label.technique.label
 
+; Tuples
+(tuple_start_marker) @punctuation.technique.tuple
+(tuple_end_marker) @punctuation.technique.tuple
+(tuple_separator) @punctuation.technique.tuple
+
 ; Response options
 (response_marker) @punctuation.technique.quotes.response
 (response_separator) @punctuation.technique.response

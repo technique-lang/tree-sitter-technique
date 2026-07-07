@@ -280,6 +280,7 @@ module.exports = grammar({
                 $.multiline_literal,
                 $.binding_expression,
                 $.list_structure,
+                $.tuple_literal,
             ),
 
         variable: ($) => choice($._identifier, $.hole),
@@ -343,12 +344,12 @@ module.exports = grammar({
                     optional(
                         seq(
                             $.parameters_start_marker,
-                            repeat(
-                                choice(
-                                    $.variable,
-                                    $.string_literal,
-                                    $.numeric_literal,
-                                    $.parameters_separator,
+                            optional(
+                                seq(
+                                    $._expression,
+                                    repeat(
+                                        seq($.parameters_separator, $._expression),
+                                    ),
                                 ),
                             ),
                             $.parameters_end_marker,
@@ -446,6 +447,22 @@ module.exports = grammar({
         list_start_marker: ($) => "[",
         pair_equals_marker: ($) => "=",
         list_end_marker: ($) => "]",
+
+        // A tuple combines two or more values of possibly differing types,
+        // e.g. `(2, "mice")`. Unlike a list, always parenthesised and
+        // comma-separated, and never just one element (that's `unit_literal`
+        // `()`, or the bare value itself).
+        tuple_literal: ($) =>
+            seq(
+                $.tuple_start_marker,
+                $._expression,
+                repeat1(seq($.tuple_separator, $._expression)),
+                $.tuple_end_marker,
+            ),
+
+        tuple_start_marker: ($) => "(",
+        tuple_separator: ($) => ",",
+        tuple_end_marker: ($) => ")",
 
         // Keywords in code
         repeat_keyword: ($) => "repeat",
