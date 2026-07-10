@@ -506,6 +506,10 @@
         {
           "type": "SYMBOL",
           "name": "inline_binding"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "cost_literal"
         }
       ]
     },
@@ -523,7 +527,7 @@
             "value": -1,
             "content": {
               "type": "PATTERN",
-              "value": "[^\\s\\n{~<][^\\n{~<]*"
+              "value": "[^\\s\\n{~<$][^\\n{~<$]*"
             }
           }
         }
@@ -1109,6 +1113,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "within_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "cost_literal"
+        },
+        {
+          "type": "SYMBOL",
           "name": "foreach_expression"
         },
         {
@@ -1635,6 +1647,48 @@
         ]
       }
     },
+    "within_expression": {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "within_keyword"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        ]
+      }
+    },
+    "cost_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "cost_marker"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "cost_marker": {
+      "type": "STRING",
+      "value": "$"
+    },
     "list_structure": {
       "type": "SEQ",
       "members": [
@@ -1824,6 +1878,10 @@
     "repeat_keyword": {
       "type": "STRING",
       "value": "repeat"
+    },
+    "within_keyword": {
+      "type": "STRING",
+      "value": "within"
     },
     "foreach_keyword": {
       "type": "STRING",
