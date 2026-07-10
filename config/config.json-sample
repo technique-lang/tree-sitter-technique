@@ -48,6 +48,10 @@
       "color": "#ad7fa8",
       "bold": true
     },
+    "number.technique.cost": {
+      "color": "#a40000",
+      "bold": true
+    },
     "operator": {
       "color": "#cc0000",
       "bold": true

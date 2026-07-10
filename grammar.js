@@ -127,6 +127,7 @@ module.exports = grammar({
                 $.inline_code,
                 $.invocation,
                 $.inline_binding,
+                $.cost_literal,
             ),
 
         // It is insanely non-intuitive how this works: $._identifier HAS to
@@ -136,7 +137,7 @@ module.exports = grammar({
         // word only would miss the token(prec()) branch so we wrap all of
         // this in a name that covers both.
         inline_text: ($) =>
-            choice($._identifier, token(prec(-1, /[^\s\n{~<][^\n{~<]*/))),
+            choice($._identifier, token(prec(-1, /[^\s\n{~<$][^\n{~<$]*/))),
 
         // inline code within descriptive text. We have to jump through some
         // additional hoops to relax and support multiline constructs
@@ -271,6 +272,8 @@ module.exports = grammar({
                 $.variable,
                 $.unit_literal,
                 $.repeat_expression,
+                $.within_expression,
+                $.cost_literal,
                 $.foreach_expression,
                 $.invocation,
                 $.application,
@@ -423,6 +426,14 @@ module.exports = grammar({
         repeat_expression: ($) =>
             prec(2, seq($.repeat_keyword, $._expression)),
 
+        within_expression: ($) =>
+            prec(2, seq($.within_keyword, $._expression)),
+
+        cost_literal: ($) =>
+            seq($.cost_marker, "(", $._expression, ")"),
+
+        cost_marker: ($) => "$",
+
         list_structure: ($) =>
             seq(
                 $.list_start_marker,
@@ -464,6 +475,7 @@ module.exports = grammar({
 
         // Keywords in code
         repeat_keyword: ($) => "repeat",
+        within_keyword: ($) => "within",
         foreach_keyword: ($) => "foreach",
         in_keyword: ($) => "in",
     },

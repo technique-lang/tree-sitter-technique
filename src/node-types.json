@@ -16,6 +16,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -73,6 +77,10 @@
         },
         {
           "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
           "named": true
         }
       ]
@@ -137,6 +145,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -191,6 +203,85 @@
         {
           "type": "variable",
           "named": true
+        },
+        {
+          "type": "within_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cost_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
+          "type": "cost_marker",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "list_structure",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
+          "named": true
         }
       ]
     }
@@ -242,6 +333,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "cost_literal",
+          "named": true
+        },
         {
           "type": "inline_binding",
           "named": true
@@ -295,6 +390,10 @@
         },
         {
           "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "cost_literal",
           "named": true
         },
         {
@@ -359,6 +458,10 @@
         },
         {
           "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
           "named": true
         }
       ]
@@ -449,6 +552,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -491,6 +598,10 @@
         {
           "type": "variable",
           "named": true
+        },
+        {
+          "type": "within_expression",
+          "named": true
         }
       ]
     }
@@ -514,6 +625,10 @@
         },
         {
           "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "cost_literal",
           "named": true
         },
         {
@@ -583,6 +698,10 @@
         {
           "type": "variable",
           "named": true
+        },
+        {
+          "type": "within_expression",
+          "named": true
         }
       ]
     }
@@ -648,6 +767,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -701,6 +824,10 @@
         },
         {
           "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
           "named": true
         }
       ]
@@ -779,6 +906,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -828,6 +959,10 @@
         },
         {
           "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
           "named": true
         }
       ]
@@ -942,6 +1077,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -987,6 +1126,10 @@
         },
         {
           "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
           "named": true
         }
       ]
@@ -1119,6 +1262,10 @@
       "required": true,
       "types": [
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "inline_binding",
           "named": true
         },
@@ -1188,6 +1335,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "cost_literal",
+          "named": true
+        },
         {
           "type": "inline_binding",
           "named": true
@@ -1271,6 +1422,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -1320,6 +1475,10 @@
         },
         {
           "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
           "named": true
         }
       ]
@@ -1416,6 +1575,10 @@
           "named": true
         },
         {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -1470,6 +1633,10 @@
         {
           "type": "variable",
           "named": true
+        },
+        {
+          "type": "within_expression",
+          "named": true
         }
       ]
     }
@@ -1508,6 +1675,81 @@
     "type": "wildcard",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "within_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "application",
+          "named": true
+        },
+        {
+          "type": "binding_expression",
+          "named": true
+        },
+        {
+          "type": "cost_literal",
+          "named": true
+        },
+        {
+          "type": "foreach_expression",
+          "named": true
+        },
+        {
+          "type": "invocation",
+          "named": true
+        },
+        {
+          "type": "list_structure",
+          "named": true
+        },
+        {
+          "type": "multiline_literal",
+          "named": true
+        },
+        {
+          "type": "numeric_literal",
+          "named": true
+        },
+        {
+          "type": "repeat_expression",
+          "named": true
+        },
+        {
+          "type": "response_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_literal",
+          "named": true
+        },
+        {
+          "type": "unit_literal",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "within_expression",
+          "named": true
+        },
+        {
+          "type": "within_keyword",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "\n",
@@ -1571,6 +1813,10 @@
   },
   {
     "type": "code_start_marker",
+    "named": true
+  },
+  {
+    "type": "cost_marker",
     "named": true
   },
   {
@@ -1660,5 +1906,9 @@
   {
     "type": "v1",
     "named": false
+  },
+  {
+    "type": "within_keyword",
+    "named": true
   }
 ]
