@@ -69,8 +69,22 @@
 
 ; Keywords
 (repeat_keyword) @keyword.technique.repeat
+(within_keyword) @keyword.technique.within
 (foreach_keyword) @keyword.technique.foreach
 (in_keyword) @keyword.technique.in
+
+(cost_marker) @punctuation.technique.cost
+
+; A quantity inside a cost literal, or a within budget, is dull red, distinct
+; from an ordinary numeric_literal elsewhere - both are Resource-typed
+; quantities (a spend and a ceiling on the same budget), so they share the
+; same colour. These patterns only match a numeric_literal that is a direct
+; child of cost_literal/within_expression, and override the general
+; @number.technique.numeric capture above for that node.
+(cost_literal
+  (numeric_literal) @number.technique.cost)
+(within_expression
+  (numeric_literal) @number.technique.cost)
 
 ; Lists and tablets
 (list_start_marker) @punctuation.technique.tablet
@@ -95,4 +109,4 @@
 (role_reset) @attribute.technique.role
 (place_marker) @attribute.technique.place
 (place_name) @attribute.technique.place
-(place_reset) @attribute.technique.role
+(place_reset) @attribute.technique.place
