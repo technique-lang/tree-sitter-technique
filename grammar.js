@@ -149,13 +149,24 @@ module.exports = grammar({
             ),
 
         _inline_code_content: ($) =>
-            choice(
+            seq(
+                repeat(/\n+/),
                 $._expression,
-                seq(
-                    optional($._expression),
-                    repeat1(seq(/\n+/, optional($._expression))),
-                ),
+                repeat(seq($._statement_separator, $._expression)),
+                optional($._statement_separator),
             ),
+
+        // Statements within a code block may be separated by `;`, by one or
+        // more newlines, or both - mirroring read_code_block()'s loop, which
+        // treats `;` as an optional marker rather than a hard delimiter.
+        _statement_separator: ($) =>
+            choice(
+                $.expression_separator,
+                /\n+/,
+                seq($.expression_separator, /\n+/),
+            ),
+
+        expression_separator: ($) => ";",
 
         code_start_marker: ($) => "{",
         code_end_marker: ($) => "}",
