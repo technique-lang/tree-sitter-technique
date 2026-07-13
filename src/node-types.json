@@ -556,6 +556,10 @@
           "named": true
         },
         {
+          "type": "expression_separator",
+          "named": true
+        },
+        {
           "type": "foreach_expression",
           "named": true
         },
@@ -1821,6 +1825,10 @@
   },
   {
     "type": "declaration_marker",
+    "named": true
+  },
+  {
+    "type": "expression_separator",
     "named": true
   },
   {

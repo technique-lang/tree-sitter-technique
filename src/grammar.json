@@ -559,54 +559,78 @@
       ]
     },
     "_inline_code_content": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\n+"
+          }
+        },
         {
           "type": "SYMBOL",
           "name": "_expression"
         },
         {
-          "type": "SEQ",
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_statement_separator"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_expression"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_statement_separator"
             },
             {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "PATTERN",
-                    "value": "\\n+"
-                  },
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "_expression"
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
-                  }
-                ]
-              }
+              "type": "BLANK"
             }
           ]
         }
       ]
+    },
+    "_statement_separator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "expression_separator"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\n+"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "expression_separator"
+            },
+            {
+              "type": "PATTERN",
+              "value": "\\n+"
+            }
+          ]
+        }
+      ]
+    },
+    "expression_separator": {
+      "type": "STRING",
+      "value": ";"
     },
     "code_start_marker": {
       "type": "STRING",

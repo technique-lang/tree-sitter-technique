@@ -42,6 +42,7 @@
 ; Code blocks
 (code_start_marker) @punctuation.technique.code
 (code_end_marker) @punctuation.technique.code
+(expression_separator) @punctuation.technique.code
 
 ; Numeric values, integral and quantity
 (numeric_literal) @number.technique.numeric
