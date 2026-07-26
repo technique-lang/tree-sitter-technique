@@ -807,6 +807,10 @@
           "named": true
         },
         {
+          "type": "pair_marker",
+          "named": true
+        },
+        {
           "type": "repeat_expression",
           "named": true
         },
