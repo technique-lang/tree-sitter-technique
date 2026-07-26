@@ -462,12 +462,12 @@ module.exports = grammar({
         _list_separator: ($) => /[,\n][ \t,\n]*/,
         _list_element: ($) => choice($.pair, $._expression),
 
-        pair: ($) => seq($.label, $.pair_equals_marker, $._expression),
+        pair: ($) => seq($.label, $.pair_marker, $._expression),
         label: ($) => seq($.label_marker, $.label_text, $.label_marker),
         label_marker: ($) => '"',
         label_text: ($) => $._string,
         list_start_marker: ($) => "[",
-        pair_equals_marker: ($) => "=",
+        pair_marker: ($) => "=",
         list_end_marker: ($) => "]",
 
         // Two or more comma-separated values, e.g. `(2, "mice")`. A single
