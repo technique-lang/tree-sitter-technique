@@ -446,17 +446,21 @@ module.exports = grammar({
         cost_marker: ($) => "$",
 
         list_structure: ($) =>
-            seq(
-                $.list_start_marker,
-                optional($._list_separator), // newlines/commas after opening bracket
-                optional(
-                    seq(
-                        $._list_element,
-                        repeat(seq($._list_separator, $._list_element)),
+            choice(
+                // empty tablet `[=]`, unambiguous vs empty list `[]`
+                seq($.list_start_marker, $.pair_marker, $.list_end_marker),
+                seq(
+                    $.list_start_marker,
+                    optional($._list_separator), // newlines/commas after opening bracket
+                    optional(
+                        seq(
+                            $._list_element,
+                            repeat(seq($._list_separator, $._list_element)),
+                        ),
                     ),
+                    optional($._list_separator), // newlines/commas before closing bracket
+                    $.list_end_marker,
                 ),
-                optional($._list_separator), // newlines/commas before closing bracket
-                $.list_end_marker,
             ),
 
         _list_separator: ($) => /[,\n][ \t,\n]*/,
