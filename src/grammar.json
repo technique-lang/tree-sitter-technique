@@ -1809,7 +1809,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "pair_equals_marker"
+          "name": "pair_marker"
         },
         {
           "type": "SYMBOL",
@@ -1846,7 +1846,7 @@
       "type": "STRING",
       "value": "["
     },
-    "pair_equals_marker": {
+    "pair_marker": {
       "type": "STRING",
       "value": "="
     },

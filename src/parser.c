@@ -73,7 +73,7 @@ enum ts_symbol_identifiers {
   sym_invocation_end_marker = 51,
   sym_cost_marker = 52,
   sym__list_separator = 53,
-  sym_pair_equals_marker = 54,
+  sym_pair_marker = 54,
   sym_repeat_keyword = 55,
   sym_within_keyword = 56,
   sym_foreach_keyword = 57,
@@ -231,7 +231,7 @@ static const char * const ts_symbol_names[] = {
   [sym_invocation_end_marker] = "invocation_end_marker",
   [sym_cost_marker] = "cost_marker",
   [sym__list_separator] = "_list_separator",
-  [sym_pair_equals_marker] = "pair_equals_marker",
+  [sym_pair_marker] = "pair_marker",
   [sym_repeat_keyword] = "repeat_keyword",
   [sym_within_keyword] = "within_keyword",
   [sym_foreach_keyword] = "foreach_keyword",
@@ -389,7 +389,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_invocation_end_marker] = sym_invocation_end_marker,
   [sym_cost_marker] = sym_cost_marker,
   [sym__list_separator] = sym__list_separator,
-  [sym_pair_equals_marker] = sym_pair_equals_marker,
+  [sym_pair_marker] = sym_pair_marker,
   [sym_repeat_keyword] = sym_repeat_keyword,
   [sym_within_keyword] = sym_within_keyword,
   [sym_foreach_keyword] = sym_foreach_keyword,
@@ -709,7 +709,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [sym_pair_equals_marker] = {
+  [sym_pair_marker] = {
     .visible = true,
     .named = true,
   },
@@ -3329,7 +3329,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == ',') ADVANCE(214);
       END_STATE();
     case 215:
-      ACCEPT_TOKEN(sym_pair_equals_marker);
+      ACCEPT_TOKEN(sym_pair_marker);
       END_STATE();
     case 216:
       ACCEPT_TOKEN(sym_repeat_keyword);
@@ -3806,7 +3806,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_invocation_start_marker] = ACTIONS(1),
     [sym_invocation_end_marker] = ACTIONS(1),
     [sym_cost_marker] = ACTIONS(1),
-    [sym_pair_equals_marker] = ACTIONS(1),
+    [sym_pair_marker] = ACTIONS(1),
     [sym_repeat_keyword] = ACTIONS(1),
     [sym_within_keyword] = ACTIONS(1),
     [sym_foreach_keyword] = ACTIONS(1),
@@ -9714,7 +9714,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_DQUOTE,
   [7677] = 1,
     ACTIONS(802), 1,
-      sym_pair_equals_marker,
+      sym_pair_marker,
   [7681] = 1,
     ACTIONS(804), 1,
       sym_declaration_marker,
@@ -9726,7 +9726,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_technique,
   [7693] = 1,
     ACTIONS(810), 1,
-      sym_pair_equals_marker,
+      sym_pair_marker,
   [7697] = 1,
     ACTIONS(812), 1,
       sym_invocation_end_marker,
@@ -9816,7 +9816,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_LF,
   [7813] = 1,
     ACTIONS(868), 1,
-      sym_pair_equals_marker,
+      sym_pair_marker,
   [7817] = 1,
     ACTIONS(870), 1,
       sym_declaration_marker,

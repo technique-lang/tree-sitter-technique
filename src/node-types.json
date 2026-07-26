@@ -938,7 +938,7 @@
           "named": true
         },
         {
-          "type": "pair_equals_marker",
+          "type": "pair_marker",
           "named": true
         },
         {
@@ -1864,7 +1864,7 @@
     "named": true
   },
   {
-    "type": "pair_equals_marker",
+    "type": "pair_marker",
     "named": true
   },
   {
