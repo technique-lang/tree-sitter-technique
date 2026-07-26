@@ -92,6 +92,7 @@
 (list_end_marker) @punctuation.technique.tablet
 (label_marker) @punctuation.technique.quotes.tablet
 (label_text) @label.technique.label
+(pair_marker) @punctuation.technique.tablet
 
 ; Tuples
 (tuple_start_marker) @punctuation.technique.tuple

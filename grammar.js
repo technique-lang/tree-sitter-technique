@@ -446,28 +446,32 @@ module.exports = grammar({
         cost_marker: ($) => "$",
 
         list_structure: ($) =>
-            seq(
-                $.list_start_marker,
-                optional($._list_separator), // newlines/commas after opening bracket
-                optional(
-                    seq(
-                        $._list_element,
-                        repeat(seq($._list_separator, $._list_element)),
+            choice(
+                // empty tablet `[=]`, unambiguous vs empty list `[]`
+                seq($.list_start_marker, $.pair_marker, $.list_end_marker),
+                seq(
+                    $.list_start_marker,
+                    optional($._list_separator), // newlines/commas after opening bracket
+                    optional(
+                        seq(
+                            $._list_element,
+                            repeat(seq($._list_separator, $._list_element)),
+                        ),
                     ),
+                    optional($._list_separator), // newlines/commas before closing bracket
+                    $.list_end_marker,
                 ),
-                optional($._list_separator), // newlines/commas before closing bracket
-                $.list_end_marker,
             ),
 
         _list_separator: ($) => /[,\n][ \t,\n]*/,
         _list_element: ($) => choice($.pair, $._expression),
 
-        pair: ($) => seq($.label, $.pair_equals_marker, $._expression),
+        pair: ($) => seq($.label, $.pair_marker, $._expression),
         label: ($) => seq($.label_marker, $.label_text, $.label_marker),
         label_marker: ($) => '"',
         label_text: ($) => $._string,
         list_start_marker: ($) => "[",
-        pair_equals_marker: ($) => "=",
+        pair_marker: ($) => "=",
         list_end_marker: ($) => "]",
 
         // Two or more comma-separated values, e.g. `(2, "mice")`. A single
