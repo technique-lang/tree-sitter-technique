@@ -259,12 +259,7 @@ module.exports = grammar({
                 $.response_marker,
                 $.response_value,
                 $.response_marker,
-                optional($.response_condition),
             ),
-
-        response_condition: ($) => $._condition,
-
-        _condition: ($) => token(prec(-1, /[^ \t|\n]([^|\n]*[^ \t|\n])?/)), // Condition text, stop at | or newline
 
         response_separator: ($) => "|",
         response_marker: ($) => "'",
