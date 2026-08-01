@@ -69,7 +69,9 @@ static bool is_procedure_declaration(TSLexer *lexer) {
     }
 
     // Skip horizontal whitespace
+    bool apart = false;
     while (is_horizontal_whitespace(c)) {
+        apart = true;
         lexer->advance(lexer, false);
         c = lexer->lookahead;
     }
@@ -94,16 +96,19 @@ static bool is_procedure_declaration(TSLexer *lexer) {
         }
 
         // Skip horizontal whitespace after parameters
+        apart = false;
         while (is_horizontal_whitespace(c)) {
+            apart = true;
             lexer->advance(lexer, false);
             c = lexer->lookahead;
         }
     }
 
-    // Skip horizontal whitespace before colon
-    while (is_horizontal_whitespace(c)) {
-        lexer->advance(lexer, false);
-        c = lexer->lookahead;
+    // A declaration sets its colon apart from the name, as in `name : Genus`.
+    // Prose punctuates the other way, as in `Warning: Important`, and so is
+    // never a declaration however much of a colon it has
+    if (!apart) {
+        return false;
     }
 
     // Must have a colon
