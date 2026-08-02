@@ -245,12 +245,15 @@ module.exports = grammar({
         place_name: ($) => $._identifier,
         place_reset: ($) => "*",
 
-        // Response lines
+        // Response lines. An enum can wrap onto the following line, but only
+        // after the separator and only if that line begins with a response.
         responses: ($) =>
             seq(
                 optional(/[ \t]+/), // Allow leading whitespace
                 $.response,
-                repeat(seq($.response_separator, $.response)),
+                repeat(
+                    seq($.response_separator, optional("\n"), $.response),
+                ),
                 "\n",
             ),
 
