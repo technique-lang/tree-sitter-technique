@@ -153,8 +153,8 @@
           "value": "technique"
         },
         {
-          "type": "STRING",
-          "value": "v1"
+          "type": "SYMBOL",
+          "name": "version"
         },
         {
           "type": "STRING",
@@ -195,6 +195,10 @@
           "value": "\n"
         }
       ]
+    },
+    "version": {
+      "type": "PATTERN",
+      "value": "v\\d*(\\.\\d*(\\.\\d*)?)?"
     },
     "declaration": {
       "type": "SEQ",

@@ -844,7 +844,17 @@
   {
     "type": "magic_line",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "version",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "metadata",
@@ -1907,8 +1917,8 @@
     "named": true
   },
   {
-    "type": "v1",
-    "named": false
+    "type": "version",
+    "named": true
   },
   {
     "type": "within_keyword",
