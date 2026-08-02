@@ -54,9 +54,12 @@ module.exports = grammar({
         metadata: ($) => choice($.magic_line, $.spdx_line, $.template_line),
 
         // Header lines are a single line ending with a newline
-        magic_line: ($) => seq("%", "technique", "v1", "\n"),
+        magic_line: ($) => seq("%", "technique", $.version, "\n"),
         spdx_line: ($) => seq("!", /[^\n]+/, "\n"),
         template_line: ($) => seq("&", /[^\n]+/, "\n"),
+
+        // Minimum version of the tooling needed, with minor and patch optional
+        version: ($) => /v\d*(\.\d*(\.\d*)?)?/,
 
         // Procedure declarations can be across multiple lines but are
         // terminated by (separated from subsequent content) a newline.
