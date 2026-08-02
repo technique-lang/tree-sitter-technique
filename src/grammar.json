@@ -1035,6 +1035,18 @@
                 "name": "response_separator"
               },
               {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "\n"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
                 "type": "SYMBOL",
                 "name": "response"
               }
@@ -1061,35 +1073,8 @@
         {
           "type": "SYMBOL",
           "name": "response_marker"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "response_condition"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
-    },
-    "response_condition": {
-      "type": "SYMBOL",
-      "name": "_condition"
-    },
-    "_condition": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^ \\t|\\n]([^|\\n]*[^ \\t|\\n])?"
-        }
-      }
     },
     "response_separator": {
       "type": "STRING",

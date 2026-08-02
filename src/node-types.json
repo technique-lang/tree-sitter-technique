@@ -1152,10 +1152,6 @@
       "required": true,
       "types": [
         {
-          "type": "response_condition",
-          "named": true
-        },
-        {
           "type": "response_marker",
           "named": true
         },
@@ -1165,11 +1161,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "response_condition",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "response_literal",
